@@ -1,0 +1,116 @@
+{
+  "changes": [
+    {
+      "timestamp": "2026-06-24T14:23:12.526Z",
+      "provider": "groq",
+      "field": "provider",
+      "old_value": null,
+      "new_value": "added",
+      "source": "https://groq.com/pricing"
+    },
+    {
+      "timestamp": "2026-06-24T14:23:12.526Z",
+      "provider": "together",
+      "field": "provider",
+      "old_value": null,
+      "new_value": "added",
+      "source": "https://www.together.ai/pricing"
+    },
+    {
+      "timestamp": "2026-06-24T14:23:12.526Z",
+      "provider": "cohere",
+      "field": "provider",
+      "old_value": null,
+      "new_value": "added",
+      "source": "https://cohere.com/pricing"
+    },
+    {
+      "timestamp": "2026-06-24T14:23:12.526Z",
+      "provider": "fireworks",
+      "field": "provider",
+      "old_value": null,
+      "new_value": "added",
+      "source": "https://docs.fireworks.ai/serverless/pricing"
+    },
+    {
+      "timestamp": "2026-06-24T14:23:12.526Z",
+      "provider": "meta",
+      "field": "provider",
+      "old_value": null,
+      "new_value": "added",
+      "source": "https://www.llama.com"
+    },
+    {
+      "timestamp": "2026-06-24T14:23:12.526Z",
+      "provider": "openrouter",
+      "field": "provider",
+      "old_value": null,
+      "new_value": "added",
+      "source": "https://openrouter.ai/pricing"
+    },
+    {
+      "timestamp": "2026-06-24T14:23:12.526Z",
+      "provider": "cerebras",
+      "field": "provider",
+      "old_value": null,
+      "new_value": "added",
+      "source": "https://www.cerebras.ai/pricing"
+    },
+    {
+      "timestamp": "2026-06-24T14:23:12.526Z",
+      "provider": "moonshot",
+      "field": "provider",
+      "old_value": null,
+      "new_value": "added",
+      "source": "https://platform.kimi.ai/docs/pricing/chat"
+    },
+    {
+      "timestamp": "2026-06-24T14:23:12.526Z",
+      "provider": "zhipu",
+      "field": "provider",
+      "old_value": null,
+      "new_value": "added",
+      "source": "https://open.bigmodel.cn/pricing"
+    },
+    {
+      "timestamp": "2026-06-24T14:23:12.526Z",
+      "provider": "huggingface",
+      "field": "provider",
+      "old_value": null,
+      "new_value": "added",
+      "source": "https://huggingface.co/pricing"
+    },
+    {
+      "timestamp": "2026-06-24T14:23:12.526Z",
+      "provider": "deepinfra",
+      "field": "provider",
+      "old_value": null,
+      "new_value": "added",
+      "source": "https://deepinfra.com/pricing"
+    },
+    {
+      "timestamp": "2026-06-18T02:00:00Z",
+      "provider": "anthropic",
+      "field": "models.claude-opus-4-8.api.output_per_mtok",
+      "old_value": null,
+      "new_value": 75,
+      "source": "https://www.anthropic.com/pricing"
+    },
+    {
+      "timestamp": "2026-06-11T02:00:00Z",
+      "provider": "openai",
+      "field": "models.gpt-5-5.api.input_per_mtok",
+      "old_value": 15,
+      "new_value": 12.5,
+      "source": "https://openai.com/pricing"
+    },
+    {
+      "timestamp": "2026-06-04T02:00:00Z",
+      "provider": "deepseek",
+      "field": "models.deepseek-v4-pro.api.output_per_mtok",
+      "old_value": 2.5,
+      "new_value": 2.19,
+      "source": "https://platform.deepseek.com/api-docs/pricing"
+    }
+  ]
+}

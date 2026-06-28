@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Token Price Calculator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
+  <style>
+    body { background: #0b1020; }
+    ::-webkit-scrollbar { height: 10px; width: 10px; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 6px; }
+  </style>
+</head>
+<body class="text-slate-100">
+  <div id="root" class="min-h-screen"></div>
+
+  <script type="text/babel" data-presets="react">
+const { useState, useEffect, useMemo } = React;
+
+// ---------- helpers ----------
+const fmtUSD = (n) =>
+  n == null ? "—" : n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: n < 1 ? 4 : 2 });
+const fmtTokens = (n) => {
+  if (n == null) return "—";
+  if (n >= 1e6) return (n / 1e6).toFixed(n % 1e6 === 0 ? 0 : 1) + "M";
+  if (n >= 1e3) return (n / 1e3).toFixed(0) + "K";
+  return String(n);
+};
+const fmtCtx = (n) => (n >= 1e6 ? n / 1e6 + "M" : n / 1e3 + "K");
+
+const USAGE_PRESETS = {
+  light:   { label: "Light User",  input: 500000,   output: 100000,  desc: "~10 short chats/day" },
+  regular: { label: "Regular User", input: 3000000, output: 600000,  desc: "~1hr daily chat (≈ Claude Pro target)" },
+  power:   { label: "Power User",  input: 15000000, output: 3000000, desc: "~5hr daily, heavy workflows (≈ Max 5×)" },
+  heavy:   { label: "Heavy / Agent", input: 60000000, output: 12000000, desc: "Continuous agent loops (≈ Max 20×)" },
+};
+
+const CONFIDENCE = {
+  high:   { badge: "✅ Official",   cls: "bg-emerald-900/60 text-emerald-300 border-emerald-700" },
+  medium: { badge: "🟡 Estimated", cls: "bg-amber-900/60 text-amber-300 border-amber-700" },
+  low:    { badge: "🔴 Assumed",   cls: "bg-rose-900/60 text-rose-300 border-rose-700" },
+};
+
+// ---------- small UI atoms ----------
+function Chip({ active, onClick, children, color }) {
+  return (
+    <button
+      onClick={onClick}
+      style={active && color ? { backgroundColor: color + "33", borderColor: color, color: "#fff" } : {}}
+      className={"px-3 py-1.5 rounded-full text-sm border transition select-none " +
+        (active ? "border-sky-500 bg-sky-500/20 text-white" : "border-slate-700 bg-slate-800/50 text-slate-300 hover:border-slate-500")}>
+      {children}
+    </button>
+  );
+}
+
+function Section({ title, subtitle, children, right }) {
+  return (
+    <section className="bg-slate-900/60 border border-slate-800 rounded-2xl p-5 mb-6">
+      <div className="flex items-start justify-between gap-4 mb-4">
+        <div>
+          <h2 className="text-lg font-semibold text-white">{title}</h2>
+          {subtitle && <p className="text-sm text-slate-400 mt-0.5">{subtitle}</p>}
+        </div>
+        {right}
+      </div>
+      {children}
+    </section>
+  );
+}
+
+// ---------- tree filter (sidebar) ----------
+function TreeGroup({ title, icon, items, selected, onToggle, onAll, onNone }) {
+  const [open, setOpen] = useState(true);
+  const count = items.filter((i) => selected.has(i.id)).length;
+  return (
+    <div className="border-b border-slate-800 last:border-0 pb-3 mb-3 last:mb-0 last:pb-0">
+      <div className="flex items-center justify-between">
+        <button onClick={() => setOpen((o) => !o)}
+          className="flex items-center gap-1.5 text-sm font-medium text-slate-200 hover:text-white">
+          <span className="text-slate-500 w-3 inline-block">{open ? "▾" : "▸"}</span>
+          <span>{icon} {title}</span>
+        </button>
+        <span className="text-xs text-slate-500">{count}/{items.length}</span>
+      </div>
+      {open && (
+        <div className="mt-2 ml-3 pl-3 border-l border-slate-700 space-y-1.5">
+          <div className="flex gap-3 text-xs text-sky-400 pb-1">
+            <button onClick={onAll} className="hover:underline">All</button>
+            <button onClick={onNone} className="hover:underline">None</button>
+          </div>
+          {items.map((i) => (
+            <label key={i.id} className="flex items-center gap-2 text-sm cursor-pointer text-slate-300 hover:text-white">
+              <input type="checkbox" checked={selected.has(i.id)} onChange={() => onToggle(i.id)}
+                className="accent-sky-500 w-4 h-4" />
+              <span style={i.color ? { color: i.color } : {}}>{i.emoji} {i.label}</span>
+            </label>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ---------- freshness banner ----------
+function FreshnessBanner({ meta }) {
+  const updated = new Date(meta.last_updated);
+  const ageDays = Math.floor((Date.now() - updated.getTime()) / 86400000);
+  let cls = "bg-emerald-900/40 border-emerald-700 text-emerald-200";
+  if (ageDays > 30) cls = "bg-rose-900/40 border-rose-700 text-rose-200";
+  else if (ageDays > 7) cls = "bg-amber-900/40 border-amber-700 text-amber-200";
+  const dateStr = updated.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  return (
+    <div className={"text-sm rounded-xl border px-4 py-2.5 mb-6 flex flex-wrap gap-x-2 " + cls}>
+      <span>📅 Pricing data last updated: <b>{dateStr}</b></span>
+      <span className="opacity-70">· Source verified against {meta.sources_verified} providers</span>
+      <span className="opacity-70">· {ageDays === 0 ? "Updated today" : ageDays + " days old"}</span>
+    </div>
+  );
+}
+
+// ---------- cost engine ----------
+function apiMonthlyCost(plan, usage) {
+  return (usage.input / 1e6) * plan.pricing.input_per_mtok +
+         (usage.output / 1e6) * plan.pricing.output_per_mtok;
+}
+
+// Build comparison rows from filtered data, normalised against the usage profile.
+function buildRows({ data, usage, filters }) {
+  const provName = (id) => data.providers.find((p) => p.id === id)?.name || id;
+  const provLogo = (id) => data.providers.find((p) => p.id === id)?.logo_emoji || "•";
+  const famById = Object.fromEntries(data.model_families.map((f) => [f.id, f]));
+  const modelById = Object.fromEntries(data.models.map((m) => [m.id, m]));
+  const rows = [];
+
+  // subscription plans
+  if (filters.planType !== "api") {
+    for (const s of data.subscription_plans) {
+      if (!filters.providers.has(s.provider_id)) continue;
+      if (!s.included_model_families.some((f) => filters.families.has(f))) continue;
+      const price = filters.billing === "annual" && s.annual_available && s.price_annual_monthly_usd != null
+        ? s.price_annual_monthly_usd : s.price_monthly_usd;
+      if (price > filters.budget) continue;
+      const est = s.estimated_monthly_tokens;
+      rows.push({
+        key: s.id, kind: "subscription", provider_id: s.provider_id,
+        provider: provName(s.provider_id), logo: provLogo(s.provider_id),
+        plan: s.name, families: s.included_model_families,
+        type: "Subscription", price,
+        effIn: est.input ? price / (est.input / 1e6) : null,
+        effOut: est.output ? price / (est.output / 1e6) : null,
+        ctx: s.features.context_window,
+        annualSaving: s.annual_available && s.price_annual_monthly_usd != null
+          ? (s.price_monthly_usd - s.price_annual_monthly_usd) * 12 : null,
+        notes: s.usage_limit_description, confidence: est.confidence, basis: est.basis,
+        raw: s,
+      });
+    }
+  }
+  // api plans
+  if (filters.planType !== "subscription") {
+    for (const a of data.api_plans) {
+      if (!filters.providers.has(a.provider_id)) continue;
+      const model = modelById[a.model_id];
+      if (model && !filters.families.has(model.family_id)) continue;
+      const price = apiMonthlyCost(a, usage);
+      if (price > filters.budget) continue;
+      rows.push({
+        key: a.id, kind: "api", provider_id: a.provider_id,
+        provider: provName(a.provider_id), logo: provLogo(a.provider_id),
+        plan: model ? model.name : a.model_id,
+        families: model ? [model.family_id] : [],
+        type: "API", price,
+        effIn: a.pricing.input_per_mtok, effOut: a.pricing.output_per_mtok,
+        ctx: a.context_window_tokens, annualSaving: null,
+        notes: a.notes, confidence: null, basis: null, raw: a,
+      });
+    }
+  }
+  return { rows, famById };
+}
+
+// ---------- comparison table ----------
+function CompareTable({ rows, famById, sort, setSort, pinned, togglePin }) {
+  const cols = [
+    { k: "provider", label: "Provider" },
+    { k: "plan", label: "Plan" },
+    { k: "families", label: "Model families", sortable: false },
+    { k: "type", label: "Type" },
+    { k: "price", label: "Monthly $" },
+    { k: "effIn", label: "Eff. $/MTok in" },
+    { k: "effOut", label: "Eff. $/MTok out" },
+    { k: "ctx", label: "Context" },
+    { k: "annualSaving", label: "Annual saving" },
+  ];
+  const sorted = useMemo(() => {
+    const arr = [...rows];
+    arr.sort((a, b) => {
+      const av = a[sort.key], bv = b[sort.key];
+      if (av == null) return 1; if (bv == null) return -1;
+      if (typeof av === "string") return sort.dir * av.localeCompare(bv);
+      return sort.dir * (av - bv);
+    });
+    return arr;
+  }, [rows, sort]);
+
+  // min/max for colour coding price + eff cost
+  const ext = (key) => {
+    const vals = rows.map((r) => r[key]).filter((v) => v != null && v > 0);
+    return vals.length ? { min: Math.min(...vals), max: Math.max(...vals) } : null;
+  };
+  const valueCls = (v, e) => {
+    if (v == null || !e || e.min === e.max) return "";
+    if (v === e.min) return "text-emerald-400 font-semibold";
+    if (v === e.max) return "text-rose-400";
+    return "";
+  };
+  const ePrice = ext("price"), eIn = ext("effIn"), eOut = ext("effOut");
+
+  const onSort = (k) => setSort((s) => s.key === k ? { key: k, dir: -s.dir } : { key: k, dir: 1 });
+  const arrow = (k) => sort.key === k ? (sort.dir === 1 ? " ▲" : " ▼") : "";
+
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full text-sm min-w-[920px]">
+        <thead>
+          <tr className="text-left text-slate-400 border-b border-slate-700">
+            <th className="py-2 px-2 w-8"></th>
+            {cols.map((c) => (
+              <th key={c.k}
+                  onClick={c.sortable === false ? undefined : () => onSort(c.k)}
+                  className={"py-2 px-2 whitespace-nowrap " + (c.sortable === false ? "" : "cursor-pointer hover:text-white")}>
+                {c.label}{arrow(c.k)}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {sorted.map((r) => (
+            <tr key={r.key} className="border-b border-slate-800 hover:bg-slate-800/40">
+              <td className="px-2">
+                <input type="checkbox" checked={pinned.includes(r.key)}
+                  onChange={() => togglePin(r.key)}
+                  title="Pin for side-by-side (max 4)"
+                  className="accent-sky-500 w-4 h-4" />
+              </td>
+              <td className="py-2 px-2 whitespace-nowrap"><span className="mr-1">{r.logo}</span>{r.provider}</td>
+              <td className="py-2 px-2 whitespace-nowrap font-medium text-white">{r.plan}</td>
+              <td className="py-2 px-2">
+                <div className="flex gap-1">
+                  {r.families.map((f) => (
+                    <span key={f} title={famById[f]?.label}
+                      style={{ backgroundColor: (famById[f]?.color || "#666") + "22", color: famById[f]?.color }}
+                      className="text-xs px-1.5 py-0.5 rounded">{famById[f]?.emoji}</span>
+                  ))}
+                </div>
+              </td>
+              <td className="py-2 px-2">
+                <span className={"text-xs px-1.5 py-0.5 rounded " +
+                  (r.type === "API" ? "bg-indigo-900/60 text-indigo-300" : "bg-teal-900/60 text-teal-300")}>{r.type}</span>
+              </td>
+              <td className={"py-2 px-2 whitespace-nowrap " + valueCls(r.price, ePrice)}>{fmtUSD(r.price)}</td>
+              <td className={"py-2 px-2 whitespace-nowrap " + valueCls(r.effIn, eIn)}>
+                {fmtUSD(r.effIn)}
+                {r.confidence && <span className="ml-1 text-[10px] opacity-70">{CONFIDENCE[r.confidence].badge.split(" ")[0]}</span>}
+              </td>
+              <td className={"py-2 px-2 whitespace-nowrap " + valueCls(r.effOut, eOut)}>{fmtUSD(r.effOut)}</td>
+              <td className="py-2 px-2 whitespace-nowrap text-slate-300">{fmtCtx(r.ctx)}</td>
+              <td className="py-2 px-2 whitespace-nowrap text-emerald-400">{r.annualSaving ? fmtUSD(r.annualSaving) + "/yr" : "—"}</td>
+            </tr>
+          ))}
+          {sorted.length === 0 && (
+            <tr><td colSpan={10} className="text-center text-slate-500 py-8">No plans match the current filters.</td></tr>
+          )}
+        </tbody>
+      </table>
+      <p className="text-xs text-slate-500 mt-3">
+        <span className="text-emerald-400">Green</span> = best value · <span className="text-rose-400">Red</span> = most expensive.
+        API rows use raw published $/MTok. Subscription rows show <i>effective</i> $/MTok = monthly price ÷ estimated tokens
+        (confidence badge shown). Tick a row to pin it for side-by-side comparison.
+      </p>
+    </div>
+  );
+}
+
+// ---------- side-by-side comparator ----------
+function Comparator({ rows, pinned, togglePin, famById }) {
+  const cards = pinned.map((k) => rows.find((r) => r.key === k)).filter(Boolean);
+  if (cards.length === 0)
+    return <p className="text-slate-500 text-sm">Pin up to 4 plans from the table above to compare them side by side.</p>;
+
+  const featRows = [
+    ["Type", (r) => r.type],
+    ["Monthly price", (r) => fmtUSD(r.price)],
+    ["Eff. $/MTok in", (r) => fmtUSD(r.effIn)],
+    ["Eff. $/MTok out", (r) => fmtUSD(r.effOut)],
+    ["Context window", (r) => fmtCtx(r.ctx)],
+    ["Image generation", (r) => r.raw.features ? (r.raw.features.image_generation ? "✅" : "—") : "n/a"],
+    ["Code interpreter", (r) => r.raw.features ? (r.raw.features.code_interpreter ? "✅" : "—") : "n/a"],
+    ["Web search", (r) => r.raw.features ? (r.raw.features.web_search ? "✅" : "—") : "n/a"],
+    ["Deep research", (r) => r.raw.features ? (r.raw.features.deep_research ? "✅" : "—") : "n/a"],
+    ["API access", (r) => r.raw.features ? (r.raw.features.api_access ? "✅" : "—") : "✅"],
+    ["Annual saving", (r) => r.annualSaving ? fmtUSD(r.annualSaving) + "/yr" : "—"],
+    ["Confidence", (r) => r.confidence ? CONFIDENCE[r.confidence].badge : "Published rate"],
+    ["Best for", (r) => r.raw.best_for || "—"],
+  ];
+
+  return (
+    <div className="overflow-x-auto">
+      <table className="text-sm border-separate border-spacing-x-3">
+        <thead>
+          <tr>
+            <th></th>
+            {cards.map((r) => (
+              <th key={r.key} className="text-left align-top min-w-[180px]">
+                <div className="bg-slate-800/70 border border-slate-700 rounded-lg p-3">
+                  <div className="text-xs text-slate-400">{r.logo} {r.provider}</div>
+                  <div className="font-semibold text-white">{r.plan}</div>
+                  <button onClick={() => togglePin(r.key)} className="text-xs text-rose-400 hover:underline mt-1">remove</button>
+                </div>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {featRows.map(([label, fn]) => (
+            <tr key={label}>
+              <td className="text-slate-400 py-1.5 whitespace-nowrap pr-2">{label}</td>
+              {cards.map((r) => <td key={r.key} className="py-1.5 text-slate-200">{fn(r)}</td>)}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+// ---------- model selector ----------
+function ModelSelector({ data, filters, famById }) {
+  const provName = (id) => data.providers.find((p) => p.id === id)?.name || id;
+  const visible = data.models
+    .filter((m) => filters.providers.has(m.provider_id))
+    .filter((m) => filters.families.has(m.family_id))
+    .sort((a, b) => a.popularity_rank - b.popularity_rank);
+  return (
+    <div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+        {visible.map((m) => (
+          <div key={m.id} className="bg-slate-800/50 border border-slate-700 rounded-lg p-3">
+            <div className="flex items-center justify-between">
+              <span className="font-medium text-white">{m.name}</span>
+              <span title={famById[m.family_id]?.label}
+                style={{ backgroundColor: (famById[m.family_id]?.color||"#666")+"22", color: famById[m.family_id]?.color }}
+                className="text-xs px-1.5 py-0.5 rounded">{famById[m.family_id]?.emoji} {famById[m.family_id]?.label.split(" ")[0]}</span>
+            </div>
+            <div className="text-xs text-slate-400 mt-1">{provName(m.provider_id)} · {fmtCtx(m.context_window_tokens)} ctx</div>
+            <div className="text-xs text-slate-500 mt-1">GPQA {m.benchmark_gpqa}% · {m.release_date} · #{m.popularity_rank} popular</div>
+          </div>
+        ))}
+        {visible.length === 0 && <p className="text-slate-500 text-sm">No models match the current filters.</p>}
+      </div>
+    </div>
+  );
+}
+
+// ---------- app ----------
+function App() {
+  const [data, setData] = useState(null);
+  const [err, setErr] = useState(null);
+  const [usageKey, setUsageKey] = useState("regular");
+  const [custom, setCustom] = useState({ input: 3000000, output: 600000 });
+  const [filters, setFilters] = useState(null);
+  const [sort, setSort] = useState({ key: "price", dir: 1 });
+  const [pinned, setPinned] = useState([]);
+
+  useEffect(() => {
+    fetch("data/pricing.json")
+      .then((r) => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then((d) => {
+        setData(d);
+        setFilters({
+          families: new Set(d.model_families.map((f) => f.id)),
+          providers: new Set(d.providers.map((p) => p.id)),
+          planType: "both",
+          billing: "monthly",
+          budget: 500,
+        });
+      })
+      .catch((e) => setErr(e.message));
+  }, []);
+
+  if (err) return (
+    <div className="max-w-2xl mx-auto p-8 mt-10 bg-rose-950/50 border border-rose-800 rounded-xl">
+      <h1 className="text-xl font-bold text-rose-200">Could not load data/pricing.json</h1>
+      <p className="text-rose-300 mt-2 text-sm">{err}</p>
+      <p className="text-slate-300 mt-4 text-sm">Browsers block <code>fetch()</code> over <code>file://</code>.
+        Serve the folder over HTTP, e.g.:</p>
+      <pre className="bg-slate-900 rounded p-3 mt-2 text-sm text-sky-300">python -m http.server 8000</pre>
+      <p className="text-slate-400 text-sm mt-1">then open <a className="text-sky-400 underline" href="http://localhost:8000">http://localhost:8000</a></p>
+    </div>
+  );
+  if (!data || !filters) return <div className="p-10 text-slate-400">Loading pricing data…</div>;
+
+  const usage = usageKey === "custom" ? custom : USAGE_PRESETS[usageKey];
+  const famById = Object.fromEntries(data.model_families.map((f) => [f.id, f]));
+  const { rows } = buildRows({ data, usage, filters });
+
+  const togglePin = (k) => setPinned((p) =>
+    p.includes(k) ? p.filter((x) => x !== k) : p.length >= 4 ? p : [...p, k]);
+
+  const toggleSet = (key, val) => setFilters((f) => {
+    const s = new Set(f[key]);
+    s.has(val) ? s.delete(val) : s.add(val);
+    return { ...f, [key]: s };
+  });
+  const setAll = (key, ids) => setFilters((f) => ({ ...f, [key]: new Set(ids) }));
+  const setNone = (key) => setFilters((f) => ({ ...f, [key]: new Set() }));
+
+  return (
+    <div className="max-w-7xl mx-auto px-4 py-6">
+      <header className="mb-5">
+        <h1 className="text-2xl sm:text-3xl font-bold text-white">AI Token Price Calculator</h1>
+        <p className="text-slate-400 mt-1">Compare subscription vs pay-as-you-go API pricing across providers on a like-for-like basis.</p>
+      </header>
+
+      <FreshnessBanner meta={data.meta} />
+
+      <div className="flex flex-col lg:flex-row gap-6">
+      {/* LEFT SIDEBAR — tree filters */}
+      <aside className="lg:w-72 lg:flex-shrink-0">
+        <div className="lg:sticky lg:top-4 bg-slate-900/60 border border-slate-800 rounded-2xl p-4">
+          <h2 className="text-lg font-semibold text-white mb-1">Filters</h2>
+          <p className="text-xs text-slate-400 mb-4">Refine by family, provider, plan type and budget.</p>
+
+          <TreeGroup title="Model family" icon="🧩"
+            items={data.model_families.map((f) => ({ id: f.id, emoji: f.emoji, label: f.label, color: f.color }))}
+            selected={filters.families}
+            onToggle={(id) => toggleSet("families", id)}
+            onAll={() => setAll("families", data.model_families.map((f) => f.id))}
+            onNone={() => setNone("families")} />
+
+          <TreeGroup title="Provider" icon="🏢"
+            items={data.providers.map((p) => ({ id: p.id, emoji: p.logo_emoji, label: p.name }))}
+            selected={filters.providers}
+            onToggle={(id) => toggleSet("providers", id)}
+            onAll={() => setAll("providers", data.providers.map((p) => p.id))}
+            onNone={() => setNone("providers")} />
+
+          <div className="border-t border-slate-800 pt-3 mt-1 space-y-4">
+            <div>
+              <div className="text-xs uppercase tracking-wide text-slate-500 mb-2">Plan type</div>
+              <div className="flex flex-wrap gap-2">
+                {[["both","Both"],["subscription","Subscription"],["api","API"]].map(([k,l]) => (
+                  <Chip key={k} active={filters.planType===k} onClick={() => setFilters((f)=>({...f, planType:k}))}>{l}</Chip>
+                ))}
+              </div>
+            </div>
+            <div>
+              <div className="text-xs uppercase tracking-wide text-slate-500 mb-2">Billing period</div>
+              <div className="flex flex-wrap gap-2">
+                {[["monthly","Monthly"],["annual","Annual"]].map(([k,l]) => (
+                  <Chip key={k} active={filters.billing===k} onClick={() => setFilters((f)=>({...f, billing:k}))}>{l}</Chip>
+                ))}
+              </div>
+            </div>
+            <div>
+              <div className="text-xs uppercase tracking-wide text-slate-500 mb-2">Monthly budget: {fmtUSD(filters.budget)}</div>
+              <input type="range" min="0" max="500" step="5" value={filters.budget}
+                onChange={(e) => setFilters((f)=>({...f, budget:+e.target.value}))} className="accent-sky-500 w-full" />
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      {/* MAIN COLUMN */}
+      <main className="flex-1 min-w-0">
+      {/* USAGE PROFILE */}
+      <Section title="Usage profile"
+        subtitle="Defines your monthly token volume — used to normalise API cost and compute subscription value.">
+        <div className="flex flex-wrap gap-2 mb-3">
+          {Object.entries(USAGE_PRESETS).map(([k, p]) => (
+            <Chip key={k} active={usageKey===k} onClick={() => setUsageKey(k)}>
+              {p.label} <span className="opacity-60">({fmtTokens(p.input)}/{fmtTokens(p.output)})</span>
+            </Chip>
+          ))}
+          <Chip active={usageKey==="custom"} onClick={() => setUsageKey("custom")}>Custom</Chip>
+        </div>
+        {usageKey === "custom" ? (
+          <div className="flex flex-wrap gap-4 items-end">
+            <label className="text-sm text-slate-300">Input tokens / month
+              <input type="number" value={custom.input} onChange={(e)=>setCustom((c)=>({...c, input:+e.target.value}))}
+                className="block mt-1 bg-slate-800 border border-slate-700 rounded px-2 py-1 w-40 text-white" />
+            </label>
+            <label className="text-sm text-slate-300">Output tokens / month
+              <input type="number" value={custom.output} onChange={(e)=>setCustom((c)=>({...c, output:+e.target.value}))}
+                className="block mt-1 bg-slate-800 border border-slate-700 rounded px-2 py-1 w-40 text-white" />
+            </label>
+          </div>
+        ) : (
+          <p className="text-sm text-slate-400">
+            {USAGE_PRESETS[usageKey].desc} — <b>{fmtTokens(usage.input)}</b> input + <b>{fmtTokens(usage.output)}</b> output tokens/month.
+          </p>
+        )}
+        <p className="text-xs text-slate-500 mt-2">ℹ️ Claude Pro is designed for approximately 3M tokens/month of typical use.</p>
+      </Section>
+
+      {/* COMPARISON TABLE */}
+      <Section title="Cost comparison"
+        subtitle={`${rows.length} plans · API cost calculated at your usage profile · subscriptions show effective $/MTok`}>
+        <CompareTable rows={rows} famById={famById} sort={sort} setSort={setSort}
+          pinned={pinned} togglePin={togglePin} />
+      </Section>
+
+      {/* COMPARATOR */}
+      <Section title="Side-by-side comparator"
+        subtitle="Pin up to 4 plans from the table for a detailed feature + cost breakdown.">
+        <Comparator rows={rows} pinned={pinned} togglePin={togglePin} famById={famById} />
+      </Section>
+
+      {/* MODEL SELECTOR */}
+      <Section title="Models" subtitle="All models in the dataset, grouped by capability family.">
+        <ModelSelector data={data} filters={filters} famById={famById} />
+      </Section>
+      </main>
+      </div>
+
+      <footer className="text-xs text-slate-600 py-6 text-center">
+        Data version {data.meta.version} · pipeline {data.meta.pipeline_version} · prices in USD.
+        Example dataset — figures are illustrative and may not reflect current pricing.
+      </footer>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>

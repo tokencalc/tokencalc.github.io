@@ -1,0 +1,2255 @@
+{
+  "meta": {
+    "version": "2026.06.24",
+    "last_updated": "2026-06-24T14:22:57.058Z",
+    "sources_verified": 20,
+    "pipeline_version": "1.2.0"
+  },
+  "model_families": [
+    {
+      "id": "frontier",
+      "label": "Frontier / Flagship",
+      "emoji": "🔴",
+      "color": "#ef4444",
+      "description": "State-of-the-art reasoning. Best for complex research, agent workflows.",
+      "gpqa_range": [
+        65,
+        100
+      ]
+    },
+    {
+      "id": "advanced",
+      "label": "Advanced / Workhorse",
+      "emoji": "🟠",
+      "color": "#f97316",
+      "description": "Strong capability, production-grade balance of cost and quality.",
+      "gpqa_range": [
+        50,
+        65
+      ]
+    },
+    {
+      "id": "efficient",
+      "label": "Efficient / Mid-tier",
+      "emoji": "🟡",
+      "color": "#eab308",
+      "description": "Faster and cheaper; good for most everyday tasks.",
+      "gpqa_range": [
+        35,
+        50
+      ]
+    },
+    {
+      "id": "budget",
+      "label": "Budget / Speed",
+      "emoji": "🟢",
+      "color": "#22c55e",
+      "description": "Lowest cost, highest throughput; simple tasks, high volume.",
+      "gpqa_range": [
+        0,
+        35
+      ]
+    },
+    {
+      "id": "reasoning",
+      "label": "Reasoning / Thinking",
+      "emoji": "🔵",
+      "color": "#3b82f6",
+      "description": "Dedicated chain-of-thought models with thinking budgets.",
+      "gpqa_range": [
+        50,
+        100
+      ]
+    }
+  ],
+  "providers": [
+    {
+      "id": "anthropic",
+      "name": "Anthropic",
+      "logo_emoji": "🅰️",
+      "homepage": "https://anthropic.com",
+      "pricing_page": "https://www.anthropic.com/pricing",
+      "country": "US"
+    },
+    {
+      "id": "openai",
+      "name": "OpenAI",
+      "logo_emoji": "⭕",
+      "homepage": "https://openai.com",
+      "pricing_page": "https://openai.com/pricing",
+      "country": "US"
+    },
+    {
+      "id": "google",
+      "name": "Google",
+      "logo_emoji": "🔷",
+      "homepage": "https://gemini.google.com",
+      "pricing_page": "https://ai.google.dev/pricing",
+      "country": "US"
+    },
+    {
+      "id": "xai",
+      "name": "xAI",
+      "logo_emoji": "✖️",
+      "homepage": "https://x.ai",
+      "pricing_page": "https://x.ai/api",
+      "country": "US"
+    },
+    {
+      "id": "deepseek",
+      "name": "DeepSeek",
+      "logo_emoji": "🐋",
+      "homepage": "https://deepseek.com",
+      "pricing_page": "https://platform.deepseek.com/api-docs/pricing",
+      "country": "CN"
+    },
+    {
+      "id": "alibaba",
+      "name": "Alibaba (Qwen)",
+      "logo_emoji": "🟣",
+      "homepage": "https://qwen.ai",
+      "pricing_page": "https://dashscope.aliyuncs.com/pricing",
+      "country": "CN"
+    },
+    {
+      "id": "mistral",
+      "name": "Mistral AI",
+      "logo_emoji": "🌬️",
+      "homepage": "https://mistral.ai",
+      "pricing_page": "https://mistral.ai/technology/",
+      "country": "FR"
+    },
+    {
+      "id": "microsoft",
+      "name": "Microsoft Copilot",
+      "logo_emoji": "🪟",
+      "homepage": "https://copilot.microsoft.com",
+      "pricing_page": "https://www.microsoft.com/microsoft-365/copilot",
+      "country": "US"
+    },
+    {
+      "id": "perplexity",
+      "name": "Perplexity",
+      "logo_emoji": "🔮",
+      "homepage": "https://perplexity.ai",
+      "pricing_page": "https://perplexity.ai/pro",
+      "country": "US"
+    },
+    {
+      "id": "groq",
+      "name": "Groq",
+      "logo_emoji": "⚡",
+      "homepage": "https://groq.com",
+      "pricing_page": "https://groq.com/pricing",
+      "country": "US"
+    },
+    {
+      "id": "together",
+      "name": "Together AI",
+      "logo_emoji": "🔗",
+      "homepage": "https://www.together.ai",
+      "pricing_page": "https://www.together.ai/pricing",
+      "country": "US"
+    },
+    {
+      "id": "cohere",
+      "name": "Cohere",
+      "logo_emoji": "🟦",
+      "homepage": "https://cohere.com",
+      "pricing_page": "https://cohere.com/pricing",
+      "country": "CA"
+    },
+    {
+      "id": "fireworks",
+      "name": "Fireworks AI",
+      "logo_emoji": "🎆",
+      "homepage": "https://fireworks.ai",
+      "pricing_page": "https://fireworks.ai/pricing",
+      "country": "US"
+    },
+    {
+      "id": "meta",
+      "name": "Meta (Llama)",
+      "logo_emoji": "♾️",
+      "homepage": "https://www.llama.com",
+      "pricing_page": "https://www.llama.com",
+      "country": "US"
+    },
+    {
+      "id": "openrouter",
+      "name": "OpenRouter",
+      "logo_emoji": "🧭",
+      "homepage": "https://openrouter.ai",
+      "pricing_page": "https://openrouter.ai/pricing",
+      "country": "US"
+    },
+    {
+      "id": "cerebras",
+      "name": "Cerebras",
+      "logo_emoji": "🧠",
+      "homepage": "https://www.cerebras.ai",
+      "pricing_page": "https://www.cerebras.ai/pricing",
+      "country": "US"
+    },
+    {
+      "id": "moonshot",
+      "name": "Moonshot AI (Kimi)",
+      "logo_emoji": "🌙",
+      "homepage": "https://www.moonshot.ai",
+      "pricing_page": "https://platform.kimi.ai/docs/pricing/chat",
+      "country": "CN"
+    },
+    {
+      "id": "zhipu",
+      "name": "Zhipu / Z.ai (GLM)",
+      "logo_emoji": "📘",
+      "homepage": "https://z.ai",
+      "pricing_page": "https://open.bigmodel.cn/pricing",
+      "country": "CN"
+    },
+    {
+      "id": "huggingface",
+      "name": "Hugging Face",
+      "logo_emoji": "🤗",
+      "homepage": "https://huggingface.co",
+      "pricing_page": "https://huggingface.co/pricing",
+      "country": "US"
+    },
+    {
+      "id": "deepinfra",
+      "name": "DeepInfra",
+      "logo_emoji": "🔆",
+      "homepage": "https://deepinfra.com",
+      "pricing_page": "https://deepinfra.com/pricing",
+      "country": "US"
+    }
+  ],
+  "models": [
+    {
+      "id": "claude-opus-4-8",
+      "provider_id": "anthropic",
+      "name": "Claude Opus 4.8",
+      "family_id": "frontier",
+      "context_window_tokens": 200000,
+      "release_date": "2026-05-15",
+      "api_string": "claude-opus-4-8",
+      "benchmark_gpqa": 78.2,
+      "modalities": [
+        "text",
+        "vision"
+      ],
+      "popularity_rank": 1
+    },
+    {
+      "id": "claude-opus-4-7",
+      "provider_id": "anthropic",
+      "name": "Claude Opus 4.7",
+      "family_id": "frontier",
+      "context_window_tokens": 200000,
+      "release_date": "2026-03-10",
+      "api_string": "claude-opus-4-7",
+      "benchmark_gpqa": 75.9,
+      "modalities": [
+        "text",
+        "vision"
+      ],
+      "popularity_rank": 6
+    },
+    {
+      "id": "claude-sonnet-4-6",
+      "provider_id": "anthropic",
+      "name": "Claude Sonnet 4.6",
+      "family_id": "advanced",
+      "context_window_tokens": 200000,
+      "release_date": "2026-02-01",
+      "api_string": "claude-sonnet-4-6",
+      "benchmark_gpqa": 58.4,
+      "modalities": [
+        "text",
+        "vision"
+      ],
+      "popularity_rank": 2
+    },
+    {
+      "id": "claude-haiku-4-5",
+      "provider_id": "anthropic",
+      "name": "Claude Haiku 4.5",
+      "family_id": "efficient",
+      "context_window_tokens": 200000,
+      "release_date": "2025-10-01",
+      "api_string": "claude-haiku-4-5",
+      "benchmark_gpqa": 42.1,
+      "modalities": [
+        "text",
+        "vision"
+      ],
+      "popularity_rank": 9
+    },
+    {
+      "id": "gpt-5-5",
+      "provider_id": "openai",
+      "name": "GPT-5.5",
+      "family_id": "frontier",
+      "context_window_tokens": 400000,
+      "release_date": "2026-04-20",
+      "api_string": "gpt-5.5",
+      "benchmark_gpqa": 77.5,
+      "modalities": [
+        "text",
+        "vision"
+      ],
+      "popularity_rank": 3
+    },
+    {
+      "id": "gpt-5-4",
+      "provider_id": "openai",
+      "name": "GPT-5.4",
+      "family_id": "advanced",
+      "context_window_tokens": 400000,
+      "release_date": "2026-01-15",
+      "api_string": "gpt-5.4",
+      "benchmark_gpqa": 62,
+      "modalities": [
+        "text",
+        "vision"
+      ],
+      "popularity_rank": 5
+    },
+    {
+      "id": "gpt-4-1",
+      "provider_id": "openai",
+      "name": "GPT-4.1",
+      "family_id": "efficient",
+      "context_window_tokens": 1000000,
+      "release_date": "2025-04-14",
+      "api_string": "gpt-4.1",
+      "benchmark_gpqa": 46.3,
+      "modalities": [
+        "text",
+        "vision"
+      ],
+      "popularity_rank": 11
+    },
+    {
+      "id": "gpt-4-1-nano",
+      "provider_id": "openai",
+      "name": "GPT-4.1 Nano",
+      "family_id": "budget",
+      "context_window_tokens": 1000000,
+      "release_date": "2025-04-14",
+      "api_string": "gpt-4.1-nano",
+      "benchmark_gpqa": 28.6,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 14
+    },
+    {
+      "id": "o3",
+      "provider_id": "openai",
+      "name": "OpenAI o3",
+      "family_id": "reasoning",
+      "context_window_tokens": 200000,
+      "release_date": "2025-04-16",
+      "api_string": "o3",
+      "benchmark_gpqa": 83.3,
+      "modalities": [
+        "text",
+        "vision"
+      ],
+      "popularity_rank": 7
+    },
+    {
+      "id": "gemini-3-1-pro",
+      "provider_id": "google",
+      "name": "Gemini 3.1 Pro",
+      "family_id": "frontier",
+      "context_window_tokens": 2000000,
+      "release_date": "2026-03-25",
+      "api_string": "gemini-3.1-pro",
+      "benchmark_gpqa": 76.8,
+      "modalities": [
+        "text",
+        "vision",
+        "audio"
+      ],
+      "popularity_rank": 4
+    },
+    {
+      "id": "gemini-3-5-flash",
+      "provider_id": "google",
+      "name": "Gemini 3.5 Flash",
+      "family_id": "advanced",
+      "context_window_tokens": 1000000,
+      "release_date": "2026-02-18",
+      "api_string": "gemini-3.5-flash",
+      "benchmark_gpqa": 54.7,
+      "modalities": [
+        "text",
+        "vision",
+        "audio"
+      ],
+      "popularity_rank": 8
+    },
+    {
+      "id": "gemini-flash",
+      "provider_id": "google",
+      "name": "Gemini Flash",
+      "family_id": "efficient",
+      "context_window_tokens": 1000000,
+      "release_date": "2025-09-01",
+      "api_string": "gemini-flash",
+      "benchmark_gpqa": 44,
+      "modalities": [
+        "text",
+        "vision"
+      ],
+      "popularity_rank": 12
+    },
+    {
+      "id": "gemini-flash-lite",
+      "provider_id": "google",
+      "name": "Gemini Flash-Lite",
+      "family_id": "budget",
+      "context_window_tokens": 1000000,
+      "release_date": "2025-09-01",
+      "api_string": "gemini-flash-lite",
+      "benchmark_gpqa": 31.2,
+      "modalities": [
+        "text",
+        "vision"
+      ],
+      "popularity_rank": 15
+    },
+    {
+      "id": "grok-4-3",
+      "provider_id": "xai",
+      "name": "Grok 4.3",
+      "family_id": "frontier",
+      "context_window_tokens": 256000,
+      "release_date": "2026-04-01",
+      "api_string": "grok-4.3",
+      "benchmark_gpqa": 74.5,
+      "modalities": [
+        "text",
+        "vision"
+      ],
+      "popularity_rank": 10
+    },
+    {
+      "id": "grok-4-1",
+      "provider_id": "xai",
+      "name": "Grok 4.1",
+      "family_id": "advanced",
+      "context_window_tokens": 256000,
+      "release_date": "2026-01-20",
+      "api_string": "grok-4.1",
+      "benchmark_gpqa": 60.1,
+      "modalities": [
+        "text",
+        "vision"
+      ],
+      "popularity_rank": 13
+    },
+    {
+      "id": "deepseek-v4-pro",
+      "provider_id": "deepseek",
+      "name": "DeepSeek V4 Pro",
+      "family_id": "frontier",
+      "context_window_tokens": 128000,
+      "release_date": "2026-03-01",
+      "api_string": "deepseek-v4-pro",
+      "benchmark_gpqa": 71,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 16
+    },
+    {
+      "id": "deepseek-v3-2",
+      "provider_id": "deepseek",
+      "name": "DeepSeek V3.2",
+      "family_id": "advanced",
+      "context_window_tokens": 128000,
+      "release_date": "2025-12-10",
+      "api_string": "deepseek-v3.2",
+      "benchmark_gpqa": 56.3,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 17
+    },
+    {
+      "id": "deepseek-v4-flash",
+      "provider_id": "deepseek",
+      "name": "DeepSeek V4 Flash",
+      "family_id": "budget",
+      "context_window_tokens": 128000,
+      "release_date": "2026-03-01",
+      "api_string": "deepseek-v4-flash",
+      "benchmark_gpqa": 33,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 18
+    },
+    {
+      "id": "qwen-3-7-max",
+      "provider_id": "alibaba",
+      "name": "Qwen3.7 Max",
+      "family_id": "frontier",
+      "context_window_tokens": 256000,
+      "release_date": "2026-02-28",
+      "api_string": "qwen3.7-max",
+      "benchmark_gpqa": 70.2,
+      "modalities": [
+        "text",
+        "vision"
+      ],
+      "popularity_rank": 19
+    },
+    {
+      "id": "qwen-2-5-72b",
+      "provider_id": "alibaba",
+      "name": "Qwen2.5-72B",
+      "family_id": "efficient",
+      "context_window_tokens": 131072,
+      "release_date": "2025-06-01",
+      "api_string": "qwen2.5-72b",
+      "benchmark_gpqa": 41.5,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 21
+    },
+    {
+      "id": "mistral-large-3",
+      "provider_id": "mistral",
+      "name": "Mistral Large 3",
+      "family_id": "efficient",
+      "context_window_tokens": 128000,
+      "release_date": "2025-11-15",
+      "api_string": "mistral-large-3",
+      "benchmark_gpqa": 48.9,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 20
+    },
+    {
+      "id": "mistral-small-4",
+      "provider_id": "mistral",
+      "name": "Mistral Small 4",
+      "family_id": "budget",
+      "context_window_tokens": 128000,
+      "release_date": "2026-01-05",
+      "api_string": "mistral-small-4",
+      "benchmark_gpqa": 30.5,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 22
+    },
+    {
+      "id": "groq-llama-3-1-8b",
+      "provider_id": "groq",
+      "name": "Llama 3.1 8B Instant",
+      "family_id": "budget",
+      "context_window_tokens": 128000,
+      "release_date": "2024-07-23",
+      "api_string": "llama-3.1-8b-instant",
+      "benchmark_gpqa": 30,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 23
+    },
+    {
+      "id": "groq-llama-4-scout",
+      "provider_id": "groq",
+      "name": "Llama 4 Scout",
+      "family_id": "efficient",
+      "context_window_tokens": 128000,
+      "release_date": "2025-04-05",
+      "api_string": "llama-4-scout-17b-16e",
+      "benchmark_gpqa": 45,
+      "modalities": [
+        "text",
+        "vision"
+      ],
+      "popularity_rank": 24
+    },
+    {
+      "id": "groq-llama-3-3-70b",
+      "provider_id": "groq",
+      "name": "Llama 3.3 70B Versatile",
+      "family_id": "advanced",
+      "context_window_tokens": 128000,
+      "release_date": "2024-12-06",
+      "api_string": "llama-3.3-70b-versatile",
+      "benchmark_gpqa": 55,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 25
+    },
+    {
+      "id": "groq-gpt-oss-120b",
+      "provider_id": "groq",
+      "name": "GPT-OSS 120B",
+      "family_id": "advanced",
+      "context_window_tokens": 128000,
+      "release_date": "2025-08-05",
+      "api_string": "openai/gpt-oss-120b",
+      "benchmark_gpqa": 58,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 26
+    },
+    {
+      "id": "together-deepseek-v4-pro",
+      "provider_id": "together",
+      "name": "DeepSeek V4 Pro",
+      "family_id": "frontier",
+      "context_window_tokens": 128000,
+      "release_date": "2026-03-01",
+      "api_string": "deepseek-ai/DeepSeek-V4-Pro",
+      "benchmark_gpqa": 71,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 27
+    },
+    {
+      "id": "together-qwen-3-7-max",
+      "provider_id": "together",
+      "name": "Qwen3.7 Max",
+      "family_id": "frontier",
+      "context_window_tokens": 256000,
+      "release_date": "2026-02-28",
+      "api_string": "Qwen/Qwen3.7-Max",
+      "benchmark_gpqa": 70,
+      "modalities": [
+        "text",
+        "vision"
+      ],
+      "popularity_rank": 28
+    },
+    {
+      "id": "together-glm-5-2",
+      "provider_id": "together",
+      "name": "GLM-5.2",
+      "family_id": "frontier",
+      "context_window_tokens": 200000,
+      "release_date": "2026-06-16",
+      "api_string": "zai-org/GLM-5.2",
+      "benchmark_gpqa": 72,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 29
+    },
+    {
+      "id": "together-gpt-oss-120b",
+      "provider_id": "together",
+      "name": "GPT-OSS 120B",
+      "family_id": "advanced",
+      "context_window_tokens": 128000,
+      "release_date": "2025-08-05",
+      "api_string": "openai/gpt-oss-120b",
+      "benchmark_gpqa": 58,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 30
+    },
+    {
+      "id": "cohere-command-r-plus",
+      "provider_id": "cohere",
+      "name": "Command R+",
+      "family_id": "advanced",
+      "context_window_tokens": 128000,
+      "release_date": "2024-08-30",
+      "api_string": "command-r-plus-08-2024",
+      "benchmark_gpqa": 52,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 31
+    },
+    {
+      "id": "cohere-command-r",
+      "provider_id": "cohere",
+      "name": "Command R",
+      "family_id": "efficient",
+      "context_window_tokens": 128000,
+      "release_date": "2024-03-11",
+      "api_string": "command-r-03-2024",
+      "benchmark_gpqa": 40,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 32
+    },
+    {
+      "id": "fireworks-deepseek-v4-pro",
+      "provider_id": "fireworks",
+      "name": "DeepSeek V4 Pro",
+      "family_id": "frontier",
+      "context_window_tokens": 128000,
+      "release_date": "2026-03-01",
+      "api_string": "accounts/fireworks/models/deepseek-v4-pro",
+      "benchmark_gpqa": 71,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 33
+    },
+    {
+      "id": "fireworks-deepseek-v4-flash",
+      "provider_id": "fireworks",
+      "name": "DeepSeek V4 Flash",
+      "family_id": "budget",
+      "context_window_tokens": 128000,
+      "release_date": "2026-03-01",
+      "api_string": "accounts/fireworks/models/deepseek-v4-flash",
+      "benchmark_gpqa": 33,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 34
+    },
+    {
+      "id": "fireworks-glm-5-2",
+      "provider_id": "fireworks",
+      "name": "GLM-5.2",
+      "family_id": "frontier",
+      "context_window_tokens": 200000,
+      "release_date": "2026-06-16",
+      "api_string": "accounts/fireworks/models/glm-5p2",
+      "benchmark_gpqa": 72,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 35
+    },
+    {
+      "id": "fireworks-qwen-3-7-plus",
+      "provider_id": "fireworks",
+      "name": "Qwen3.7 Plus",
+      "family_id": "efficient",
+      "context_window_tokens": 256000,
+      "release_date": "2026-02-28",
+      "api_string": "accounts/fireworks/models/qwen3p7-plus",
+      "benchmark_gpqa": 48,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 36
+    },
+    {
+      "id": "cerebras-llama-3-3-70b",
+      "provider_id": "cerebras",
+      "name": "Llama 3.3 70B",
+      "family_id": "advanced",
+      "context_window_tokens": 128000,
+      "release_date": "2024-12-06",
+      "api_string": "llama-3.3-70b",
+      "benchmark_gpqa": 55,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 37
+    },
+    {
+      "id": "cerebras-qwen-3-32b",
+      "provider_id": "cerebras",
+      "name": "Qwen3 32B",
+      "family_id": "efficient",
+      "context_window_tokens": 131000,
+      "release_date": "2025-05-01",
+      "api_string": "qwen-3-32b",
+      "benchmark_gpqa": 44,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 38
+    },
+    {
+      "id": "moonshot-kimi-k2-6",
+      "provider_id": "moonshot",
+      "name": "Kimi K2.6",
+      "family_id": "frontier",
+      "context_window_tokens": 256000,
+      "release_date": "2026-05-01",
+      "api_string": "kimi-k2.6",
+      "benchmark_gpqa": 73,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 39
+    },
+    {
+      "id": "moonshot-kimi-k2-5",
+      "provider_id": "moonshot",
+      "name": "Kimi K2.5",
+      "family_id": "advanced",
+      "context_window_tokens": 256000,
+      "release_date": "2026-02-01",
+      "api_string": "kimi-k2.5",
+      "benchmark_gpqa": 64,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 40
+    },
+    {
+      "id": "zhipu-glm-5-2",
+      "provider_id": "zhipu",
+      "name": "GLM-5.2",
+      "family_id": "frontier",
+      "context_window_tokens": 200000,
+      "release_date": "2026-06-16",
+      "api_string": "glm-5.2",
+      "benchmark_gpqa": 72,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 41
+    },
+    {
+      "id": "zhipu-glm-4-7-flash",
+      "provider_id": "zhipu",
+      "name": "GLM-4.7-Flash",
+      "family_id": "budget",
+      "context_window_tokens": 128000,
+      "release_date": "2025-12-01",
+      "api_string": "glm-4.7-flash",
+      "benchmark_gpqa": 30,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 42
+    },
+    {
+      "id": "hf-llama-3-3-70b",
+      "provider_id": "huggingface",
+      "name": "Llama 3.3 70B",
+      "family_id": "advanced",
+      "context_window_tokens": 128000,
+      "release_date": "2024-12-06",
+      "api_string": "meta-llama/Llama-3.3-70B-Instruct",
+      "benchmark_gpqa": 55,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 43
+    },
+    {
+      "id": "deepinfra-llama-3-3-70b",
+      "provider_id": "deepinfra",
+      "name": "Llama 3.3 70B Turbo",
+      "family_id": "efficient",
+      "context_window_tokens": 128000,
+      "release_date": "2024-12-06",
+      "api_string": "meta-llama/Llama-3.3-70B-Instruct-Turbo",
+      "benchmark_gpqa": 55,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 44
+    },
+    {
+      "id": "deepinfra-deepseek-v4-pro",
+      "provider_id": "deepinfra",
+      "name": "DeepSeek V4 Pro",
+      "family_id": "frontier",
+      "context_window_tokens": 128000,
+      "release_date": "2026-03-01",
+      "api_string": "deepseek-ai/DeepSeek-V4-Pro",
+      "benchmark_gpqa": 71,
+      "modalities": [
+        "text"
+      ],
+      "popularity_rank": 45
+    },
+    {
+      "id": "openrouter-claude-opus-4-8",
+      "provider_id": "openrouter",
+      "name": "Claude Opus 4.8 (via OpenRouter)",
+      "family_id": "frontier",
+      "context_window_tokens": 200000,
+      "release_date": "2026-05-15",
+      "api_string": "anthropic/claude-opus-4.8",
+      "benchmark_gpqa": 78.2,
+      "modalities": [
+        "text",
+        "vision"
+      ],
+      "popularity_rank": 46
+    }
+  ],
+  "api_plans": [
+    {
+      "id": "anthropic-opus-4-8-api",
+      "provider_id": "anthropic",
+      "model_id": "claude-opus-4-8",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 15,
+        "output_per_mtok": 75,
+        "cached_input_per_mtok": 1.5,
+        "batch_input_per_mtok": 7.5,
+        "batch_output_per_mtok": 37.5
+      },
+      "context_window_tokens": 200000,
+      "notes": "50% batch discount available",
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "anthropic-sonnet-4-6-api",
+      "provider_id": "anthropic",
+      "model_id": "claude-sonnet-4-6",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 3,
+        "output_per_mtok": 15,
+        "cached_input_per_mtok": 0.3,
+        "batch_input_per_mtok": 1.5,
+        "batch_output_per_mtok": 7.5
+      },
+      "context_window_tokens": 200000,
+      "notes": "50% batch discount available",
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "anthropic-haiku-4-5-api",
+      "provider_id": "anthropic",
+      "model_id": "claude-haiku-4-5",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 1,
+        "output_per_mtok": 5,
+        "cached_input_per_mtok": 0.1,
+        "batch_input_per_mtok": 0.5,
+        "batch_output_per_mtok": 2.5
+      },
+      "context_window_tokens": 200000,
+      "notes": "",
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "openai-gpt-5-5-api",
+      "provider_id": "openai",
+      "model_id": "gpt-5-5",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 12.5,
+        "output_per_mtok": 50,
+        "cached_input_per_mtok": 1.25,
+        "batch_input_per_mtok": 6.25,
+        "batch_output_per_mtok": 25
+      },
+      "context_window_tokens": 400000,
+      "notes": "",
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "openai-gpt-5-4-api",
+      "provider_id": "openai",
+      "model_id": "gpt-5-4",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 2.5,
+        "output_per_mtok": 10,
+        "cached_input_per_mtok": 0.25,
+        "batch_input_per_mtok": 1.25,
+        "batch_output_per_mtok": 5
+      },
+      "context_window_tokens": 400000,
+      "notes": "",
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "openai-gpt-4-1-api",
+      "provider_id": "openai",
+      "model_id": "gpt-4-1",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 2,
+        "output_per_mtok": 8,
+        "cached_input_per_mtok": 0.5,
+        "batch_input_per_mtok": 1,
+        "batch_output_per_mtok": 4
+      },
+      "context_window_tokens": 1000000,
+      "notes": "",
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "openai-gpt-4-1-nano-api",
+      "provider_id": "openai",
+      "model_id": "gpt-4-1-nano",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 0.1,
+        "output_per_mtok": 0.4,
+        "cached_input_per_mtok": 0.025,
+        "batch_input_per_mtok": 0.05,
+        "batch_output_per_mtok": 0.2
+      },
+      "context_window_tokens": 1000000,
+      "notes": "",
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "openai-o3-api",
+      "provider_id": "openai",
+      "model_id": "o3",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 10,
+        "output_per_mtok": 40,
+        "cached_input_per_mtok": 2.5,
+        "batch_input_per_mtok": 5,
+        "batch_output_per_mtok": 20
+      },
+      "context_window_tokens": 200000,
+      "notes": "Reasoning tokens billed as output",
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "google-gemini-3-1-pro-api",
+      "provider_id": "google",
+      "model_id": "gemini-3-1-pro",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 5,
+        "output_per_mtok": 20,
+        "cached_input_per_mtok": 1.25,
+        "batch_input_per_mtok": 2.5,
+        "batch_output_per_mtok": 10
+      },
+      "context_window_tokens": 2000000,
+      "notes": "Higher price tier above 200K context",
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "google-gemini-3-5-flash-api",
+      "provider_id": "google",
+      "model_id": "gemini-3-5-flash",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 0.3,
+        "output_per_mtok": 2.5,
+        "cached_input_per_mtok": 0.075,
+        "batch_input_per_mtok": 0.15,
+        "batch_output_per_mtok": 1.25
+      },
+      "context_window_tokens": 1000000,
+      "notes": "",
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "google-gemini-flash-lite-api",
+      "provider_id": "google",
+      "model_id": "gemini-flash-lite",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 0.075,
+        "output_per_mtok": 0.3,
+        "cached_input_per_mtok": 0.01875,
+        "batch_input_per_mtok": 0.0375,
+        "batch_output_per_mtok": 0.15
+      },
+      "context_window_tokens": 1000000,
+      "notes": "Lowest cost per token in dataset",
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "xai-grok-4-3-api",
+      "provider_id": "xai",
+      "model_id": "grok-4-3",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 5,
+        "output_per_mtok": 25,
+        "cached_input_per_mtok": 1.25,
+        "batch_input_per_mtok": 2.5,
+        "batch_output_per_mtok": 12.5
+      },
+      "context_window_tokens": 256000,
+      "notes": "",
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "xai-grok-4-1-api",
+      "provider_id": "xai",
+      "model_id": "grok-4-1",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 2,
+        "output_per_mtok": 10,
+        "cached_input_per_mtok": 0.5,
+        "batch_input_per_mtok": 1,
+        "batch_output_per_mtok": 5
+      },
+      "context_window_tokens": 256000,
+      "notes": "",
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "deepseek-v4-pro-api",
+      "provider_id": "deepseek",
+      "model_id": "deepseek-v4-pro",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 0.55,
+        "output_per_mtok": 2.19,
+        "cached_input_per_mtok": 0.07,
+        "batch_input_per_mtok": 0.275,
+        "batch_output_per_mtok": 1.095
+      },
+      "context_window_tokens": 128000,
+      "notes": "Off-peak discount up to 75%",
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "deepseek-v4-flash-api",
+      "provider_id": "deepseek",
+      "model_id": "deepseek-v4-flash",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 0.14,
+        "output_per_mtok": 0.28,
+        "cached_input_per_mtok": 0.014,
+        "batch_input_per_mtok": 0.07,
+        "batch_output_per_mtok": 0.14
+      },
+      "context_window_tokens": 128000,
+      "notes": "Off-peak discount up to 75%",
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "alibaba-qwen-3-7-max-api",
+      "provider_id": "alibaba",
+      "model_id": "qwen-3-7-max",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 1.6,
+        "output_per_mtok": 6.4,
+        "cached_input_per_mtok": 0.4,
+        "batch_input_per_mtok": 0.8,
+        "batch_output_per_mtok": 3.2
+      },
+      "context_window_tokens": 256000,
+      "notes": "Via DashScope",
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "mistral-large-3-api",
+      "provider_id": "mistral",
+      "model_id": "mistral-large-3",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 2,
+        "output_per_mtok": 6,
+        "cached_input_per_mtok": 0.5,
+        "batch_input_per_mtok": 1,
+        "batch_output_per_mtok": 3
+      },
+      "context_window_tokens": 128000,
+      "notes": "",
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "mistral-small-4-api",
+      "provider_id": "mistral",
+      "model_id": "mistral-small-4",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 0.2,
+        "output_per_mtok": 0.6,
+        "cached_input_per_mtok": 0.05,
+        "batch_input_per_mtok": 0.1,
+        "batch_output_per_mtok": 0.3
+      },
+      "context_window_tokens": 128000,
+      "notes": "",
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "groq-llama-3-1-8b-api",
+      "provider_id": "groq",
+      "model_id": "groq-llama-3-1-8b",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 0.05,
+        "output_per_mtok": 0.08
+      },
+      "context_window_tokens": 128000,
+      "notes": "Llama (Meta) hosted by Groq; batch −50%",
+      "verified_date": "2026-06-24"
+    },
+    {
+      "id": "groq-llama-4-scout-api",
+      "provider_id": "groq",
+      "model_id": "groq-llama-4-scout",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 0.11,
+        "output_per_mtok": 0.34
+      },
+      "context_window_tokens": 128000,
+      "notes": "Llama (Meta) hosted by Groq",
+      "verified_date": "2026-06-24"
+    },
+    {
+      "id": "groq-llama-3-3-70b-api",
+      "provider_id": "groq",
+      "model_id": "groq-llama-3-3-70b",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 0.59,
+        "output_per_mtok": 0.79
+      },
+      "context_window_tokens": 128000,
+      "notes": "Llama (Meta) hosted by Groq",
+      "verified_date": "2026-06-24"
+    },
+    {
+      "id": "groq-gpt-oss-120b-api",
+      "provider_id": "groq",
+      "model_id": "groq-gpt-oss-120b",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 0.15,
+        "output_per_mtok": 0.6,
+        "cached_input_per_mtok": 0.075
+      },
+      "context_window_tokens": 128000,
+      "notes": "OpenAI open-weight hosted by Groq",
+      "verified_date": "2026-06-24"
+    },
+    {
+      "id": "together-deepseek-v4-pro-api",
+      "provider_id": "together",
+      "model_id": "together-deepseek-v4-pro",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 1.74,
+        "output_per_mtok": 3.48,
+        "cached_input_per_mtok": 0.2
+      },
+      "context_window_tokens": 128000,
+      "notes": "DeepSeek hosted by Together; batch −75%",
+      "verified_date": "2026-06-24"
+    },
+    {
+      "id": "together-qwen-3-7-max-api",
+      "provider_id": "together",
+      "model_id": "together-qwen-3-7-max",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 1.25,
+        "output_per_mtok": 3.75,
+        "cached_input_per_mtok": 0.13
+      },
+      "context_window_tokens": 256000,
+      "notes": "Qwen (Alibaba) hosted by Together",
+      "verified_date": "2026-06-24"
+    },
+    {
+      "id": "together-glm-5-2-api",
+      "provider_id": "together",
+      "model_id": "together-glm-5-2",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 1.4,
+        "output_per_mtok": 4.4,
+        "cached_input_per_mtok": 0.26
+      },
+      "context_window_tokens": 200000,
+      "notes": "GLM (Zhipu) hosted by Together",
+      "verified_date": "2026-06-24"
+    },
+    {
+      "id": "together-gpt-oss-120b-api",
+      "provider_id": "together",
+      "model_id": "together-gpt-oss-120b",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 0.15,
+        "output_per_mtok": 0.6
+      },
+      "context_window_tokens": 128000,
+      "notes": "OpenAI open-weight hosted by Together",
+      "verified_date": "2026-06-24"
+    },
+    {
+      "id": "cohere-command-r-plus-api",
+      "provider_id": "cohere",
+      "model_id": "cohere-command-r-plus",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 2.5,
+        "output_per_mtok": 10
+      },
+      "context_window_tokens": 128000,
+      "notes": "",
+      "verified_date": "2026-06-24"
+    },
+    {
+      "id": "cohere-command-r-api",
+      "provider_id": "cohere",
+      "model_id": "cohere-command-r",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 0.5,
+        "output_per_mtok": 1.5
+      },
+      "context_window_tokens": 128000,
+      "notes": "",
+      "verified_date": "2026-06-24"
+    },
+    {
+      "id": "fireworks-deepseek-v4-pro-api",
+      "provider_id": "fireworks",
+      "model_id": "fireworks-deepseek-v4-pro",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 1.74,
+        "output_per_mtok": 3.48
+      },
+      "context_window_tokens": 128000,
+      "notes": "DeepSeek hosted by Fireworks; batch −50%",
+      "verified_date": "2026-06-24"
+    },
+    {
+      "id": "fireworks-deepseek-v4-flash-api",
+      "provider_id": "fireworks",
+      "model_id": "fireworks-deepseek-v4-flash",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 0.14,
+        "output_per_mtok": 0.28
+      },
+      "context_window_tokens": 128000,
+      "notes": "DeepSeek hosted by Fireworks",
+      "verified_date": "2026-06-24"
+    },
+    {
+      "id": "fireworks-glm-5-2-api",
+      "provider_id": "fireworks",
+      "model_id": "fireworks-glm-5-2",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 1.4,
+        "output_per_mtok": 4.4
+      },
+      "context_window_tokens": 200000,
+      "notes": "GLM (Zhipu) hosted by Fireworks",
+      "verified_date": "2026-06-24"
+    },
+    {
+      "id": "fireworks-qwen-3-7-plus-api",
+      "provider_id": "fireworks",
+      "model_id": "fireworks-qwen-3-7-plus",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 0.4,
+        "output_per_mtok": 1.6
+      },
+      "context_window_tokens": 256000,
+      "notes": "Qwen (Alibaba) hosted by Fireworks",
+      "verified_date": "2026-06-24"
+    },
+    {
+      "id": "moonshot-kimi-k2-6-api",
+      "provider_id": "moonshot",
+      "model_id": "moonshot-kimi-k2-6",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 0.95,
+        "output_per_mtok": 4,
+        "cached_input_per_mtok": 0.16
+      },
+      "context_window_tokens": 256000,
+      "notes": "Cached input $0.16/MTok",
+      "verified_date": "2026-06-24"
+    },
+    {
+      "id": "moonshot-kimi-k2-5-api",
+      "provider_id": "moonshot",
+      "model_id": "moonshot-kimi-k2-5",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 0.6,
+        "output_per_mtok": 3,
+        "cached_input_per_mtok": 0.1
+      },
+      "context_window_tokens": 256000,
+      "notes": "Cached input $0.10/MTok",
+      "verified_date": "2026-06-24"
+    },
+    {
+      "id": "zhipu-glm-5-2-api",
+      "provider_id": "zhipu",
+      "model_id": "zhipu-glm-5-2",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 1.4,
+        "output_per_mtok": 4.4,
+        "cached_input_per_mtok": 0.26
+      },
+      "context_window_tokens": 200000,
+      "notes": "",
+      "verified_date": "2026-06-24"
+    },
+    {
+      "id": "zhipu-glm-4-7-flash-api",
+      "provider_id": "zhipu",
+      "model_id": "zhipu-glm-4-7-flash",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 0,
+        "output_per_mtok": 0
+      },
+      "context_window_tokens": 128000,
+      "notes": "Free tier model",
+      "verified_date": "2026-06-24"
+    },
+    {
+      "id": "deepinfra-llama-3-3-70b-api",
+      "provider_id": "deepinfra",
+      "model_id": "deepinfra-llama-3-3-70b",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 0.1,
+        "output_per_mtok": 0.32
+      },
+      "context_window_tokens": 128000,
+      "notes": "Llama (Meta) hosted by DeepInfra",
+      "verified_date": "2026-06-24"
+    },
+    {
+      "id": "deepinfra-deepseek-v4-pro-api",
+      "provider_id": "deepinfra",
+      "model_id": "deepinfra-deepseek-v4-pro",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 1.3,
+        "output_per_mtok": 2.6
+      },
+      "context_window_tokens": 128000,
+      "notes": "DeepSeek hosted by DeepInfra",
+      "verified_date": "2026-06-24"
+    },
+    {
+      "id": "openrouter-claude-opus-4-8-api",
+      "provider_id": "openrouter",
+      "model_id": "openrouter-claude-opus-4-8",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 5,
+        "output_per_mtok": 25
+      },
+      "context_window_tokens": 200000,
+      "notes": "Pass-through pricing (no markup) + 5.5% platform fee",
+      "verified_date": "2026-06-24"
+    }
+  ],
+  "subscription_plans": [
+    {
+      "id": "anthropic-pro",
+      "provider_id": "anthropic",
+      "name": "Claude Pro",
+      "plan_type": "subscription",
+      "tier": "standard",
+      "price_monthly_usd": 20,
+      "price_annual_monthly_usd": 17,
+      "annual_available": true,
+      "included_model_families": [
+        "frontier",
+        "advanced",
+        "efficient"
+      ],
+      "included_model_ids": [
+        "claude-opus-4-8",
+        "claude-sonnet-4-6",
+        "claude-haiku-4-5"
+      ],
+      "usage_limit_description": "~5× free usage bucket",
+      "estimated_monthly_tokens": {
+        "input": 3000000,
+        "output": 600000,
+        "basis": "official_statement",
+        "confidence": "high"
+      },
+      "features": {
+        "image_generation": false,
+        "code_interpreter": true,
+        "web_search": true,
+        "deep_research": true,
+        "api_access": false,
+        "context_window": 200000,
+        "team_admin": false,
+        "data_training_opt_out": true
+      },
+      "best_for": "Individuals using Claude ~1hr/day for chat and coding",
+      "comparable_plans": [
+        "openai-plus",
+        "google-ai-pro"
+      ],
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "anthropic-max-5x",
+      "provider_id": "anthropic",
+      "name": "Claude Max 5×",
+      "plan_type": "subscription",
+      "tier": "pro",
+      "price_monthly_usd": 100,
+      "price_annual_monthly_usd": null,
+      "annual_available": false,
+      "included_model_families": [
+        "frontier",
+        "advanced",
+        "efficient"
+      ],
+      "included_model_ids": [
+        "claude-opus-4-8",
+        "claude-sonnet-4-6",
+        "claude-haiku-4-5"
+      ],
+      "usage_limit_description": "5× Pro usage bucket",
+      "estimated_monthly_tokens": {
+        "input": 15000000,
+        "output": 3000000,
+        "basis": "community_estimates",
+        "confidence": "medium"
+      },
+      "features": {
+        "image_generation": false,
+        "code_interpreter": true,
+        "web_search": true,
+        "deep_research": true,
+        "api_access": false,
+        "context_window": 200000,
+        "team_admin": false,
+        "data_training_opt_out": true
+      },
+      "best_for": "Power users with sustained daily coding and research",
+      "comparable_plans": [
+        "openai-pro-100",
+        "xai-supergrok"
+      ],
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "anthropic-max-20x",
+      "provider_id": "anthropic",
+      "name": "Claude Max 20×",
+      "plan_type": "subscription",
+      "tier": "heavy",
+      "price_monthly_usd": 200,
+      "price_annual_monthly_usd": null,
+      "annual_available": false,
+      "included_model_families": [
+        "frontier",
+        "advanced",
+        "efficient"
+      ],
+      "included_model_ids": [
+        "claude-opus-4-8",
+        "claude-sonnet-4-6",
+        "claude-haiku-4-5"
+      ],
+      "usage_limit_description": "20× Pro usage bucket",
+      "estimated_monthly_tokens": {
+        "input": 60000000,
+        "output": 12000000,
+        "basis": "community_estimates",
+        "confidence": "low"
+      },
+      "features": {
+        "image_generation": false,
+        "code_interpreter": true,
+        "web_search": true,
+        "deep_research": true,
+        "api_access": false,
+        "context_window": 200000,
+        "team_admin": false,
+        "data_training_opt_out": true
+      },
+      "best_for": "Heavy daily users, agent loops, sustained coding sessions",
+      "comparable_plans": [
+        "openai-pro-200",
+        "google-ultra-200"
+      ],
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "openai-plus",
+      "provider_id": "openai",
+      "name": "ChatGPT Plus",
+      "plan_type": "subscription",
+      "tier": "standard",
+      "price_monthly_usd": 20,
+      "price_annual_monthly_usd": null,
+      "annual_available": false,
+      "included_model_families": [
+        "frontier",
+        "advanced",
+        "efficient",
+        "reasoning"
+      ],
+      "included_model_ids": [
+        "gpt-5-5",
+        "gpt-5-4",
+        "gpt-4-1",
+        "o3"
+      ],
+      "usage_limit_description": "Standard message caps on GPT-5.5 / o3",
+      "estimated_monthly_tokens": {
+        "input": 3500000,
+        "output": 700000,
+        "basis": "reverse_engineered",
+        "confidence": "medium"
+      },
+      "features": {
+        "image_generation": true,
+        "code_interpreter": true,
+        "web_search": true,
+        "deep_research": true,
+        "api_access": false,
+        "context_window": 128000,
+        "team_admin": false,
+        "data_training_opt_out": true
+      },
+      "best_for": "General everyday ChatGPT users wanting image gen + reasoning",
+      "comparable_plans": [
+        "anthropic-pro",
+        "google-ai-pro"
+      ],
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "openai-pro-100",
+      "provider_id": "openai",
+      "name": "ChatGPT Pro $100",
+      "plan_type": "subscription",
+      "tier": "pro",
+      "price_monthly_usd": 100,
+      "price_annual_monthly_usd": null,
+      "annual_available": false,
+      "included_model_families": [
+        "frontier",
+        "advanced",
+        "efficient",
+        "reasoning"
+      ],
+      "included_model_ids": [
+        "gpt-5-5",
+        "gpt-5-4",
+        "gpt-4-1",
+        "o3"
+      ],
+      "usage_limit_description": "Expanded caps, higher o3 limits",
+      "estimated_monthly_tokens": {
+        "input": 16000000,
+        "output": 3200000,
+        "basis": "reverse_engineered",
+        "confidence": "low"
+      },
+      "features": {
+        "image_generation": true,
+        "code_interpreter": true,
+        "web_search": true,
+        "deep_research": true,
+        "api_access": false,
+        "context_window": 128000,
+        "team_admin": false,
+        "data_training_opt_out": true
+      },
+      "best_for": "Heavy ChatGPT users not yet needing unlimited Pro",
+      "comparable_plans": [
+        "anthropic-max-5x"
+      ],
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "openai-pro-200",
+      "provider_id": "openai",
+      "name": "ChatGPT Pro $200",
+      "plan_type": "subscription",
+      "tier": "heavy",
+      "price_monthly_usd": 200,
+      "price_annual_monthly_usd": null,
+      "annual_available": false,
+      "included_model_families": [
+        "frontier",
+        "advanced",
+        "efficient",
+        "reasoning"
+      ],
+      "included_model_ids": [
+        "gpt-5-5",
+        "gpt-5-4",
+        "gpt-4-1",
+        "o3"
+      ],
+      "usage_limit_description": "Near-unlimited GPT-5.5, o3 Pro mode",
+      "estimated_monthly_tokens": {
+        "input": 65000000,
+        "output": 13000000,
+        "basis": "assumed",
+        "confidence": "low"
+      },
+      "features": {
+        "image_generation": true,
+        "code_interpreter": true,
+        "web_search": true,
+        "deep_research": true,
+        "api_access": false,
+        "context_window": 128000,
+        "team_admin": false,
+        "data_training_opt_out": true
+      },
+      "best_for": "Researchers and engineers wanting unlimited frontier + reasoning",
+      "comparable_plans": [
+        "anthropic-max-20x",
+        "google-ultra-200"
+      ],
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "google-ai-pro",
+      "provider_id": "google",
+      "name": "Gemini AI Pro",
+      "plan_type": "subscription",
+      "tier": "standard",
+      "price_monthly_usd": 19.99,
+      "price_annual_monthly_usd": 16.66,
+      "annual_available": true,
+      "included_model_families": [
+        "frontier",
+        "advanced",
+        "efficient"
+      ],
+      "included_model_ids": [
+        "gemini-3-1-pro",
+        "gemini-3-5-flash",
+        "gemini-flash"
+      ],
+      "usage_limit_description": "Higher limits on Gemini 3.1 Pro",
+      "estimated_monthly_tokens": {
+        "input": 4000000,
+        "output": 800000,
+        "basis": "reverse_engineered",
+        "confidence": "medium"
+      },
+      "features": {
+        "image_generation": true,
+        "code_interpreter": true,
+        "web_search": true,
+        "deep_research": true,
+        "api_access": false,
+        "context_window": 1000000,
+        "team_admin": false,
+        "data_training_opt_out": false
+      },
+      "best_for": "Google ecosystem users wanting long-context + image gen",
+      "comparable_plans": [
+        "anthropic-pro",
+        "openai-plus"
+      ],
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "google-ultra-200",
+      "provider_id": "google",
+      "name": "Gemini Ultra $200",
+      "plan_type": "subscription",
+      "tier": "heavy",
+      "price_monthly_usd": 199.99,
+      "price_annual_monthly_usd": null,
+      "annual_available": false,
+      "included_model_families": [
+        "frontier",
+        "advanced",
+        "efficient",
+        "reasoning"
+      ],
+      "included_model_ids": [
+        "gemini-3-1-pro",
+        "gemini-3-5-flash",
+        "gemini-flash"
+      ],
+      "usage_limit_description": "Highest Gemini limits, Deep Think, Veo video",
+      "estimated_monthly_tokens": {
+        "input": 62000000,
+        "output": 12500000,
+        "basis": "assumed",
+        "confidence": "low"
+      },
+      "features": {
+        "image_generation": true,
+        "code_interpreter": true,
+        "web_search": true,
+        "deep_research": true,
+        "api_access": false,
+        "context_window": 2000000,
+        "team_admin": false,
+        "data_training_opt_out": false
+      },
+      "best_for": "Power users wanting 2M context, Deep Think and video gen",
+      "comparable_plans": [
+        "anthropic-max-20x",
+        "openai-pro-200"
+      ],
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "xai-supergrok",
+      "provider_id": "xai",
+      "name": "SuperGrok",
+      "plan_type": "subscription",
+      "tier": "pro",
+      "price_monthly_usd": 50,
+      "price_annual_monthly_usd": null,
+      "annual_available": false,
+      "included_model_families": [
+        "frontier",
+        "advanced"
+      ],
+      "included_model_ids": [
+        "grok-4-3",
+        "grok-4-1"
+      ],
+      "usage_limit_description": "Expanded Grok limits + voice",
+      "estimated_monthly_tokens": {
+        "input": 8000000,
+        "output": 1600000,
+        "basis": "community_estimates",
+        "confidence": "low"
+      },
+      "features": {
+        "image_generation": true,
+        "code_interpreter": true,
+        "web_search": true,
+        "deep_research": true,
+        "api_access": false,
+        "context_window": 256000,
+        "team_admin": false,
+        "data_training_opt_out": false
+      },
+      "best_for": "X / Grok users wanting expanded limits and real-time data",
+      "comparable_plans": [
+        "anthropic-max-5x"
+      ],
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "xai-supergrok-heavy",
+      "provider_id": "xai",
+      "name": "SuperGrok Heavy",
+      "plan_type": "subscription",
+      "tier": "heavy",
+      "price_monthly_usd": 300,
+      "price_annual_monthly_usd": null,
+      "annual_available": false,
+      "included_model_families": [
+        "frontier",
+        "advanced"
+      ],
+      "included_model_ids": [
+        "grok-4-3",
+        "grok-4-1"
+      ],
+      "usage_limit_description": "Grok Heavy multi-agent mode",
+      "estimated_monthly_tokens": {
+        "input": 70000000,
+        "output": 14000000,
+        "basis": "assumed",
+        "confidence": "low"
+      },
+      "features": {
+        "image_generation": true,
+        "code_interpreter": true,
+        "web_search": true,
+        "deep_research": true,
+        "api_access": false,
+        "context_window": 256000,
+        "team_admin": false,
+        "data_training_opt_out": false
+      },
+      "best_for": "Maximum Grok throughput with multi-agent Heavy mode",
+      "comparable_plans": [
+        "anthropic-max-20x",
+        "openai-pro-200"
+      ],
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "mistral-le-chat-pro",
+      "provider_id": "mistral",
+      "name": "Le Chat Pro",
+      "plan_type": "subscription",
+      "tier": "standard",
+      "price_monthly_usd": 14.99,
+      "price_annual_monthly_usd": null,
+      "annual_available": false,
+      "included_model_families": [
+        "efficient",
+        "budget"
+      ],
+      "included_model_ids": [
+        "mistral-large-3",
+        "mistral-small-4"
+      ],
+      "usage_limit_description": "Extended Le Chat usage",
+      "estimated_monthly_tokens": {
+        "input": 2500000,
+        "output": 500000,
+        "basis": "assumed",
+        "confidence": "low"
+      },
+      "features": {
+        "image_generation": true,
+        "code_interpreter": true,
+        "web_search": true,
+        "deep_research": false,
+        "api_access": false,
+        "context_window": 128000,
+        "team_admin": false,
+        "data_training_opt_out": true
+      },
+      "best_for": "EU-based users wanting a privacy-focused assistant",
+      "comparable_plans": [
+        "anthropic-pro"
+      ],
+      "verified_date": "2026-06-18"
+    },
+    {
+      "id": "perplexity-pro",
+      "provider_id": "perplexity",
+      "name": "Perplexity Pro",
+      "plan_type": "subscription",
+      "tier": "standard",
+      "price_monthly_usd": 20,
+      "price_annual_monthly_usd": 16.67,
+      "annual_available": true,
+      "included_model_families": [
+        "frontier",
+        "advanced"
+      ],
+      "included_model_ids": [
+        "gpt-5-5",
+        "claude-opus-4-8",
+        "gemini-3-1-pro"
+      ],
+      "usage_limit_description": "300+ Pro searches/day; wraps multiple providers",
+      "estimated_monthly_tokens": {
+        "input": 3000000,
+        "output": 600000,
+        "basis": "assumed",
+        "confidence": "low"
+      },
+      "features": {
+        "image_generation": true,
+        "code_interpreter": false,
+        "web_search": true,
+        "deep_research": true,
+        "api_access": true,
+        "context_window": 200000,
+        "team_admin": false,
+        "data_training_opt_out": true
+      },
+      "best_for": "Search-first users wanting access to multiple frontier models",
+      "comparable_plans": [
+        "anthropic-pro",
+        "openai-plus"
+      ],
+      "verified_date": "2026-06-18"
+    },
+    {
+      "plan_type": "subscription",
+      "price_annual_monthly_usd": null,
+      "annual_available": false,
+      "comparable_plans": [
+        "anthropic-pro"
+      ],
+      "verified_date": "2026-06-24",
+      "id": "zhipu-glm-coding-lite",
+      "provider_id": "zhipu",
+      "name": "GLM Coding Lite",
+      "tier": "standard",
+      "price_monthly_usd": 10,
+      "included_model_families": [
+        "frontier",
+        "budget"
+      ],
+      "included_model_ids": [
+        "zhipu-glm-5-2",
+        "zhipu-glm-4-7-flash"
+      ],
+      "usage_limit_description": "Billed quarterly ($30/quarter); coding quota",
+      "estimated_monthly_tokens": {
+        "input": 8000000,
+        "output": 1600000,
+        "basis": "assumed",
+        "confidence": "low"
+      },
+      "features": {
+        "image_generation": false,
+        "code_interpreter": true,
+        "web_search": false,
+        "deep_research": false,
+        "api_access": true,
+        "context_window": 200000,
+        "team_admin": false,
+        "data_training_opt_out": true
+      },
+      "best_for": "Budget coding on a frontier-class GLM model"
+    },
+    {
+      "plan_type": "subscription",
+      "price_annual_monthly_usd": null,
+      "annual_available": false,
+      "comparable_plans": [
+        "anthropic-max-5x"
+      ],
+      "verified_date": "2026-06-24",
+      "id": "zhipu-glm-coding-pro",
+      "provider_id": "zhipu",
+      "name": "GLM Coding Pro",
+      "tier": "pro",
+      "price_monthly_usd": 30,
+      "included_model_families": [
+        "frontier",
+        "budget"
+      ],
+      "included_model_ids": [
+        "zhipu-glm-5-2",
+        "zhipu-glm-4-7-flash"
+      ],
+      "usage_limit_description": "Billed quarterly ($90/quarter)",
+      "estimated_monthly_tokens": {
+        "input": 30000000,
+        "output": 6000000,
+        "basis": "assumed",
+        "confidence": "low"
+      },
+      "features": {
+        "image_generation": false,
+        "code_interpreter": true,
+        "web_search": false,
+        "deep_research": false,
+        "api_access": true,
+        "context_window": 200000,
+        "team_admin": false,
+        "data_training_opt_out": true
+      },
+      "best_for": "Heavy GLM coding sessions"
+    },
+    {
+      "plan_type": "subscription",
+      "price_annual_monthly_usd": null,
+      "annual_available": false,
+      "comparable_plans": [
+        "anthropic-max-20x"
+      ],
+      "verified_date": "2026-06-24",
+      "id": "zhipu-glm-coding-max",
+      "provider_id": "zhipu",
+      "name": "GLM Coding Max",
+      "tier": "heavy",
+      "price_monthly_usd": 80,
+      "included_model_families": [
+        "frontier",
+        "budget"
+      ],
+      "included_model_ids": [
+        "zhipu-glm-5-2",
+        "zhipu-glm-4-7-flash"
+      ],
+      "usage_limit_description": "Billed quarterly ($240/quarter)",
+      "estimated_monthly_tokens": {
+        "input": 80000000,
+        "output": 16000000,
+        "basis": "assumed",
+        "confidence": "low"
+      },
+      "features": {
+        "image_generation": false,
+        "code_interpreter": true,
+        "web_search": false,
+        "deep_research": false,
+        "api_access": true,
+        "context_window": 200000,
+        "team_admin": false,
+        "data_training_opt_out": true
+      },
+      "best_for": "Maximum GLM agentic throughput"
+    },
+    {
+      "plan_type": "subscription",
+      "price_annual_monthly_usd": null,
+      "annual_available": false,
+      "comparable_plans": [
+        "anthropic-max-5x"
+      ],
+      "verified_date": "2026-06-24",
+      "id": "cerebras-code-pro",
+      "provider_id": "cerebras",
+      "name": "Cerebras Code Pro",
+      "tier": "pro",
+      "price_monthly_usd": 50,
+      "included_model_families": [
+        "advanced",
+        "efficient"
+      ],
+      "included_model_ids": [
+        "cerebras-llama-3-3-70b",
+        "cerebras-qwen-3-32b"
+      ],
+      "usage_limit_description": "Up to 24M tokens/day on Cerebras-speed inference",
+      "estimated_monthly_tokens": {
+        "input": 40000000,
+        "output": 8000000,
+        "basis": "reverse_engineered",
+        "confidence": "low"
+      },
+      "features": {
+        "image_generation": false,
+        "code_interpreter": true,
+        "web_search": false,
+        "deep_research": false,
+        "api_access": true,
+        "context_window": 128000,
+        "team_admin": false,
+        "data_training_opt_out": true
+      },
+      "best_for": "Fast open-model coding at ~2000 tok/s"
+    },
+    {
+      "plan_type": "subscription",
+      "price_annual_monthly_usd": null,
+      "annual_available": false,
+      "comparable_plans": [
+        "anthropic-max-20x",
+        "openai-pro-200"
+      ],
+      "verified_date": "2026-06-24",
+      "id": "cerebras-code-max",
+      "provider_id": "cerebras",
+      "name": "Cerebras Code Max",
+      "tier": "heavy",
+      "price_monthly_usd": 200,
+      "included_model_families": [
+        "advanced",
+        "efficient"
+      ],
+      "included_model_ids": [
+        "cerebras-llama-3-3-70b",
+        "cerebras-qwen-3-32b"
+      ],
+      "usage_limit_description": "Up to 120M tokens/day",
+      "estimated_monthly_tokens": {
+        "input": 120000000,
+        "output": 24000000,
+        "basis": "reverse_engineered",
+        "confidence": "low"
+      },
+      "features": {
+        "image_generation": false,
+        "code_interpreter": true,
+        "web_search": false,
+        "deep_research": false,
+        "api_access": true,
+        "context_window": 128000,
+        "team_admin": false,
+        "data_training_opt_out": true
+      },
+      "best_for": "Maximum-throughput fast inference"
+    },
+    {
+      "plan_type": "subscription",
+      "price_annual_monthly_usd": null,
+      "annual_available": false,
+      "comparable_plans": [
+        "mistral-le-chat-pro"
+      ],
+      "verified_date": "2026-06-24",
+      "id": "huggingface-pro",
+      "provider_id": "huggingface",
+      "name": "Hugging Face PRO",
+      "tier": "standard",
+      "price_monthly_usd": 9,
+      "included_model_families": [
+        "advanced"
+      ],
+      "included_model_ids": [
+        "hf-llama-3-3-70b"
+      ],
+      "usage_limit_description": "20× included inference credits; ZeroGPU quota",
+      "estimated_monthly_tokens": {
+        "input": 2000000,
+        "output": 400000,
+        "basis": "assumed",
+        "confidence": "low"
+      },
+      "features": {
+        "image_generation": false,
+        "code_interpreter": false,
+        "web_search": false,
+        "deep_research": false,
+        "api_access": true,
+        "context_window": 128000,
+        "team_admin": false,
+        "data_training_opt_out": true
+      },
+      "best_for": "Hobbyists using open models + Spaces"
+    },
+    {
+      "plan_type": "subscription",
+      "price_annual_monthly_usd": null,
+      "annual_available": false,
+      "comparable_plans": [
+        "anthropic-pro"
+      ],
+      "verified_date": "2026-06-24",
+      "id": "huggingface-team",
+      "provider_id": "huggingface",
+      "name": "Hugging Face Team",
+      "tier": "team",
+      "price_monthly_usd": 20,
+      "included_model_families": [
+        "advanced"
+      ],
+      "included_model_ids": [
+        "hf-llama-3-3-70b"
+      ],
+      "usage_limit_description": "Per-seat; SSO, audit logs, Inference Provider PRO benefits",
+      "estimated_monthly_tokens": {
+        "input": 2000000,
+        "output": 400000,
+        "basis": "assumed",
+        "confidence": "low"
+      },
+      "features": {
+        "image_generation": false,
+        "code_interpreter": false,
+        "web_search": false,
+        "deep_research": false,
+        "api_access": true,
+        "context_window": 128000,
+        "team_admin": true,
+        "data_training_opt_out": true
+      },
+      "best_for": "Teams standardising on open models"
+    }
+  ]
+}

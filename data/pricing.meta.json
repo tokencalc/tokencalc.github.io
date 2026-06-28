@@ -1,0 +1,128 @@
+{
+  "version": "2026.06.24",
+  "last_updated": "2026-06-24T14:22:57.058Z",
+  "sources_verified": 20,
+  "pipeline_version": "1.2.0",
+  "sources": [
+    "https://www.anthropic.com/pricing",
+    "https://openai.com/pricing",
+    "https://ai.google.dev/pricing",
+    "https://x.ai/api",
+    "https://platform.deepseek.com/api-docs/pricing",
+    "https://dashscope.aliyuncs.com/pricing",
+    "https://mistral.ai/technology/",
+    "https://www.microsoft.com/en-us/microsoft-365/copilot/compare-copilot-plans",
+    "https://perplexity.ai/pro",
+    "https://groq.com/pricing",
+    "https://www.together.ai/pricing",
+    "https://cohere.com/pricing",
+    "https://fireworks.ai/pricing",
+    "https://www.llama.com",
+    "https://openrouter.ai/pricing",
+    "https://www.cerebras.ai/pricing",
+    "https://platform.kimi.ai/docs/pricing/chat",
+    "https://open.bigmodel.cn/pricing",
+    "https://huggingface.co/pricing",
+    "https://deepinfra.com/pricing"
+  ],
+  "changelog": [
+    {
+      "date": "2026-06-24",
+      "provider": "groq",
+      "field": "provider",
+      "old_value": null,
+      "new_value": "added"
+    },
+    {
+      "date": "2026-06-24",
+      "provider": "together",
+      "field": "provider",
+      "old_value": null,
+      "new_value": "added"
+    },
+    {
+      "date": "2026-06-24",
+      "provider": "cohere",
+      "field": "provider",
+      "old_value": null,
+      "new_value": "added"
+    },
+    {
+      "date": "2026-06-24",
+      "provider": "fireworks",
+      "field": "provider",
+      "old_value": null,
+      "new_value": "added"
+    },
+    {
+      "date": "2026-06-24",
+      "provider": "meta",
+      "field": "provider",
+      "old_value": null,
+      "new_value": "added"
+    },
+    {
+      "date": "2026-06-24",
+      "provider": "openrouter",
+      "field": "provider",
+      "old_value": null,
+      "new_value": "added"
+    },
+    {
+      "date": "2026-06-24",
+      "provider": "cerebras",
+      "field": "provider",
+      "old_value": null,
+      "new_value": "added"
+    },
+    {
+      "date": "2026-06-24",
+      "provider": "moonshot",
+      "field": "provider",
+      "old_value": null,
+      "new_value": "added"
+    },
+    {
+      "date": "2026-06-24",
+      "provider": "zhipu",
+      "field": "provider",
+      "old_value": null,
+      "new_value": "added"
+    },
+    {
+      "date": "2026-06-24",
+      "provider": "huggingface",
+      "field": "provider",
+      "old_value": null,
+      "new_value": "added"
+    },
+    {
+      "date": "2026-06-24",
+      "provider": "deepinfra",
+      "field": "provider",
+      "old_value": null,
+      "new_value": "added"
+    },
+    {
+      "date": "2026-06-18",
+      "provider": "anthropic",
+      "field": "claude-opus-4-8 output_per_mtok",
+      "old_value": null,
+      "new_value": 75
+    },
+    {
+      "date": "2026-06-11",
+      "provider": "openai",
+      "field": "gpt-5-5 input_per_mtok",
+      "old_value": 15,
+      "new_value": 12.5
+    },
+    {
+      "date": "2026-06-04",
+      "provider": "deepseek",
+      "field": "deepseek-v4-pro output_per_mtok",
+      "old_value": 2.5,
+      "new_value": 2.19
+    }
+  ]
+}
