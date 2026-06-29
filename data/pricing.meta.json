@@ -28,6 +28,48 @@
   "changelog": [
     {
       "date": "2026-06-29",
+      "provider": "fireworks",
+      "field": "models.fireworks-deepseek-v4-pro.api.cached_input_per_mtok",
+      "old_value": null,
+      "new_value": 0.145
+    },
+    {
+      "date": "2026-06-29",
+      "provider": "fireworks",
+      "field": "models.fireworks-deepseek-v4-flash.api.cached_input_per_mtok",
+      "old_value": null,
+      "new_value": 0.028
+    },
+    {
+      "date": "2026-06-29",
+      "provider": "fireworks",
+      "field": "models.fireworks-glm-5-2.api.cached_input_per_mtok",
+      "old_value": null,
+      "new_value": 0.14
+    },
+    {
+      "date": "2026-06-29",
+      "provider": "fireworks",
+      "field": "models.fireworks-qwen-3-7-plus.api.cached_input_per_mtok",
+      "old_value": null,
+      "new_value": 0.08
+    },
+    {
+      "date": "2026-06-29",
+      "provider": "openrouter",
+      "field": "models.openrouter-claude-opus-4-8.api.context_window_tokens",
+      "old_value": 200000,
+      "new_value": 1000000
+    },
+    {
+      "date": "2026-06-29",
+      "provider": "openrouter",
+      "field": "models.openrouter-claude-opus-4-8.context_window_tokens",
+      "old_value": 200000,
+      "new_value": 1000000
+    },
+    {
+      "date": "2026-06-29",
       "provider": "openai",
       "field": "models.gpt-5-5.api.input_per_mtok",
       "old_value": 12.5,

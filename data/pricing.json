@@ -879,7 +879,7 @@
       "provider_id": "openrouter",
       "name": "Claude Opus 4.8 (via OpenRouter)",
       "family_id": "frontier",
-      "context_window_tokens": 200000,
+      "context_window_tokens": 1000000,
       "release_date": "2026-05-15",
       "api_string": "anthropic/claude-opus-4.8",
       "benchmark_gpqa": 78.2,
@@ -1156,7 +1156,7 @@
       },
       "context_window_tokens": 128000,
       "notes": "",
-      "verified_date": "2026-06-18"
+      "verified_date": "2026-06-29"
     },
     {
       "id": "mistral-small-4-api",
@@ -1172,7 +1172,7 @@
       },
       "context_window_tokens": 128000,
       "notes": "",
-      "verified_date": "2026-06-18"
+      "verified_date": "2026-06-29"
     },
     {
       "id": "groq-llama-3-1-8b-api",
@@ -1185,7 +1185,7 @@
       },
       "context_window_tokens": 128000,
       "notes": "Llama (Meta) hosted by Groq; batch −50%",
-      "verified_date": "2026-06-24"
+      "verified_date": "2026-06-29"
     },
     {
       "id": "groq-llama-4-scout-api",
@@ -1198,7 +1198,7 @@
       },
       "context_window_tokens": 128000,
       "notes": "Llama (Meta) hosted by Groq",
-      "verified_date": "2026-06-24"
+      "verified_date": "2026-06-29"
     },
     {
       "id": "groq-llama-3-3-70b-api",
@@ -1211,7 +1211,7 @@
       },
       "context_window_tokens": 128000,
       "notes": "Llama (Meta) hosted by Groq",
-      "verified_date": "2026-06-24"
+      "verified_date": "2026-06-29"
     },
     {
       "id": "groq-gpt-oss-120b-api",
@@ -1225,7 +1225,7 @@
       },
       "context_window_tokens": 128000,
       "notes": "OpenAI open-weight hosted by Groq",
-      "verified_date": "2026-06-24"
+      "verified_date": "2026-06-29"
     },
     {
       "id": "together-deepseek-v4-pro-api",
@@ -1239,7 +1239,7 @@
       },
       "context_window_tokens": 128000,
       "notes": "DeepSeek hosted by Together; batch −75%",
-      "verified_date": "2026-06-24"
+      "verified_date": "2026-06-29"
     },
     {
       "id": "together-qwen-3-7-max-api",
@@ -1253,7 +1253,7 @@
       },
       "context_window_tokens": 256000,
       "notes": "Qwen (Alibaba) hosted by Together",
-      "verified_date": "2026-06-24"
+      "verified_date": "2026-06-29"
     },
     {
       "id": "together-glm-5-2-api",
@@ -1267,7 +1267,7 @@
       },
       "context_window_tokens": 200000,
       "notes": "GLM (Zhipu) hosted by Together",
-      "verified_date": "2026-06-24"
+      "verified_date": "2026-06-29"
     },
     {
       "id": "together-gpt-oss-120b-api",
@@ -1280,7 +1280,7 @@
       },
       "context_window_tokens": 128000,
       "notes": "OpenAI open-weight hosted by Together",
-      "verified_date": "2026-06-24"
+      "verified_date": "2026-06-29"
     },
     {
       "id": "cohere-command-r-plus-api",
@@ -1293,7 +1293,7 @@
       },
       "context_window_tokens": 128000,
       "notes": "",
-      "verified_date": "2026-06-24"
+      "verified_date": "2026-06-29"
     },
     {
       "id": "cohere-command-r-api",
@@ -1306,7 +1306,7 @@
       },
       "context_window_tokens": 128000,
       "notes": "",
-      "verified_date": "2026-06-24"
+      "verified_date": "2026-06-29"
     },
     {
       "id": "fireworks-deepseek-v4-pro-api",
@@ -1315,11 +1315,12 @@
       "plan_type": "api",
       "pricing": {
         "input_per_mtok": 1.74,
-        "output_per_mtok": 3.48
+        "output_per_mtok": 3.48,
+        "cached_input_per_mtok": 0.145
       },
       "context_window_tokens": 128000,
       "notes": "DeepSeek hosted by Fireworks; batch −50%",
-      "verified_date": "2026-06-24"
+      "verified_date": "2026-06-29"
     },
     {
       "id": "fireworks-deepseek-v4-flash-api",
@@ -1328,11 +1329,12 @@
       "plan_type": "api",
       "pricing": {
         "input_per_mtok": 0.14,
-        "output_per_mtok": 0.28
+        "output_per_mtok": 0.28,
+        "cached_input_per_mtok": 0.028
       },
       "context_window_tokens": 128000,
       "notes": "DeepSeek hosted by Fireworks",
-      "verified_date": "2026-06-24"
+      "verified_date": "2026-06-29"
     },
     {
       "id": "fireworks-glm-5-2-api",
@@ -1341,11 +1343,12 @@
       "plan_type": "api",
       "pricing": {
         "input_per_mtok": 1.4,
-        "output_per_mtok": 4.4
+        "output_per_mtok": 4.4,
+        "cached_input_per_mtok": 0.14
       },
       "context_window_tokens": 200000,
       "notes": "GLM (Zhipu) hosted by Fireworks",
-      "verified_date": "2026-06-24"
+      "verified_date": "2026-06-29"
     },
     {
       "id": "fireworks-qwen-3-7-plus-api",
@@ -1354,11 +1357,12 @@
       "plan_type": "api",
       "pricing": {
         "input_per_mtok": 0.4,
-        "output_per_mtok": 1.6
+        "output_per_mtok": 1.6,
+        "cached_input_per_mtok": 0.08
       },
       "context_window_tokens": 256000,
       "notes": "Qwen (Alibaba) hosted by Fireworks",
-      "verified_date": "2026-06-24"
+      "verified_date": "2026-06-29"
     },
     {
       "id": "moonshot-kimi-k2-6-api",
@@ -1372,7 +1376,7 @@
       },
       "context_window_tokens": 256000,
       "notes": "Cached input $0.16/MTok",
-      "verified_date": "2026-06-24"
+      "verified_date": "2026-06-29"
     },
     {
       "id": "moonshot-kimi-k2-5-api",
@@ -1386,7 +1390,7 @@
       },
       "context_window_tokens": 256000,
       "notes": "Cached input $0.10/MTok",
-      "verified_date": "2026-06-24"
+      "verified_date": "2026-06-29"
     },
     {
       "id": "zhipu-glm-5-2-api",
@@ -1400,7 +1404,7 @@
       },
       "context_window_tokens": 200000,
       "notes": "",
-      "verified_date": "2026-06-24"
+      "verified_date": "2026-06-29"
     },
     {
       "id": "zhipu-glm-4-7-flash-api",
@@ -1426,7 +1430,7 @@
       },
       "context_window_tokens": 128000,
       "notes": "Llama (Meta) hosted by DeepInfra",
-      "verified_date": "2026-06-24"
+      "verified_date": "2026-06-29"
     },
     {
       "id": "deepinfra-deepseek-v4-pro-api",
@@ -1439,7 +1443,7 @@
       },
       "context_window_tokens": 128000,
       "notes": "DeepSeek hosted by DeepInfra",
-      "verified_date": "2026-06-24"
+      "verified_date": "2026-06-29"
     },
     {
       "id": "openrouter-claude-opus-4-8-api",
@@ -1450,9 +1454,9 @@
         "input_per_mtok": 5,
         "output_per_mtok": 25
       },
-      "context_window_tokens": 200000,
+      "context_window_tokens": 1000000,
       "notes": "Pass-through pricing (no markup) + 5.5% platform fee",
-      "verified_date": "2026-06-24"
+      "verified_date": "2026-06-29"
     }
   ],
   "subscription_plans": [
