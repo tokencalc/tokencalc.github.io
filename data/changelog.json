@@ -1,6 +1,310 @@
 {
   "changes": [
     {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "openai",
+      "field": "models.gpt-5-5.api.input_per_mtok",
+      "old_value": 12.5,
+      "new_value": 5,
+      "source": "https://developers.openai.com/api/docs/pricing"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "openai",
+      "field": "models.gpt-5-5.api.output_per_mtok",
+      "old_value": 50,
+      "new_value": 30,
+      "source": "https://developers.openai.com/api/docs/pricing"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "openai",
+      "field": "models.gpt-5-5.api.cached_input_per_mtok",
+      "old_value": 1.25,
+      "new_value": 0.5,
+      "source": "https://developers.openai.com/api/docs/pricing"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "openai",
+      "field": "models.gpt-5-5.api.batch_input_per_mtok",
+      "old_value": 6.25,
+      "new_value": 2.5,
+      "source": "https://developers.openai.com/api/docs/pricing"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "openai",
+      "field": "models.gpt-5-5.api.batch_output_per_mtok",
+      "old_value": 25,
+      "new_value": 15,
+      "source": "https://developers.openai.com/api/docs/pricing"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "openai",
+      "field": "models.gpt-5-4.api.output_per_mtok",
+      "old_value": 10,
+      "new_value": 15,
+      "source": "https://developers.openai.com/api/docs/pricing"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "openai",
+      "field": "models.gpt-5-4.api.batch_output_per_mtok",
+      "old_value": 5,
+      "new_value": 7.5,
+      "source": "https://developers.openai.com/api/docs/pricing"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "anthropic",
+      "field": "models.claude-opus-4-8.api.input_per_mtok",
+      "old_value": 15,
+      "new_value": 5,
+      "source": "https://platform.claude.com/docs/en/docs/about-claude/models/overview"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "anthropic",
+      "field": "models.claude-opus-4-8.api.output_per_mtok",
+      "old_value": 75,
+      "new_value": 25,
+      "source": "https://platform.claude.com/docs/en/docs/about-claude/models/overview"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "anthropic",
+      "field": "models.claude-opus-4-8.api.cached_input_per_mtok",
+      "old_value": 1.5,
+      "new_value": 0.5,
+      "source": "https://platform.claude.com/docs/en/docs/about-claude/models/overview"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "anthropic",
+      "field": "models.claude-opus-4-8.api.batch_input_per_mtok",
+      "old_value": 7.5,
+      "new_value": 2.5,
+      "source": "https://platform.claude.com/docs/en/docs/about-claude/models/overview"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "anthropic",
+      "field": "models.claude-opus-4-8.api.batch_output_per_mtok",
+      "old_value": 37.5,
+      "new_value": 12.5,
+      "source": "https://platform.claude.com/docs/en/docs/about-claude/models/overview"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "anthropic",
+      "field": "models.claude-opus-4-8.api.context_window_tokens",
+      "old_value": 200000,
+      "new_value": 1000000,
+      "source": "https://platform.claude.com/docs/en/docs/about-claude/models/overview"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "anthropic",
+      "field": "models.claude-sonnet-4-6.api.context_window_tokens",
+      "old_value": 200000,
+      "new_value": 1000000,
+      "source": "https://platform.claude.com/docs/en/docs/about-claude/models/overview"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "anthropic",
+      "field": "models.claude-opus-4-8.context_window_tokens",
+      "old_value": 200000,
+      "new_value": 1000000,
+      "source": "https://platform.claude.com/docs/en/docs/about-claude/models/overview"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "anthropic",
+      "field": "models.claude-sonnet-4-6.context_window_tokens",
+      "old_value": 200000,
+      "new_value": 1000000,
+      "source": "https://platform.claude.com/docs/en/docs/about-claude/models/overview"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "google",
+      "field": "models.gemini-3-1-pro.api.input_per_mtok",
+      "old_value": 5,
+      "new_value": 2,
+      "source": "https://ai.google.dev/gemini-api/docs/pricing"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "google",
+      "field": "models.gemini-3-1-pro.api.output_per_mtok",
+      "old_value": 20,
+      "new_value": 12,
+      "source": "https://ai.google.dev/gemini-api/docs/pricing"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "google",
+      "field": "models.gemini-3-1-pro.api.cached_input_per_mtok",
+      "old_value": 1.25,
+      "new_value": null,
+      "source": "https://ai.google.dev/gemini-api/docs/pricing"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "google",
+      "field": "models.gemini-3-1-pro.api.batch_input_per_mtok",
+      "old_value": 2.5,
+      "new_value": 1,
+      "source": "https://ai.google.dev/gemini-api/docs/pricing"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "google",
+      "field": "models.gemini-3-1-pro.api.batch_output_per_mtok",
+      "old_value": 10,
+      "new_value": 6,
+      "source": "https://ai.google.dev/gemini-api/docs/pricing"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "google",
+      "field": "models.gemini-3-5-flash.api.input_per_mtok",
+      "old_value": 0.3,
+      "new_value": 1.5,
+      "source": "https://ai.google.dev/gemini-api/docs/pricing"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "google",
+      "field": "models.gemini-3-5-flash.api.output_per_mtok",
+      "old_value": 2.5,
+      "new_value": 9,
+      "source": "https://ai.google.dev/gemini-api/docs/pricing"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "google",
+      "field": "models.gemini-3-5-flash.api.cached_input_per_mtok",
+      "old_value": 0.075,
+      "new_value": 0.15,
+      "source": "https://ai.google.dev/gemini-api/docs/pricing"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "google",
+      "field": "models.gemini-3-5-flash.api.batch_input_per_mtok",
+      "old_value": 0.15,
+      "new_value": 0.75,
+      "source": "https://ai.google.dev/gemini-api/docs/pricing"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "google",
+      "field": "models.gemini-3-5-flash.api.batch_output_per_mtok",
+      "old_value": 1.25,
+      "new_value": 4.5,
+      "source": "https://ai.google.dev/gemini-api/docs/pricing"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "google",
+      "field": "models.gemini-flash-lite.api.input_per_mtok",
+      "old_value": 0.075,
+      "new_value": 0.25,
+      "source": "https://ai.google.dev/gemini-api/docs/pricing"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "google",
+      "field": "models.gemini-flash-lite.api.output_per_mtok",
+      "old_value": 0.3,
+      "new_value": 1.5,
+      "source": "https://ai.google.dev/gemini-api/docs/pricing"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "google",
+      "field": "models.gemini-flash-lite.api.cached_input_per_mtok",
+      "old_value": 0.01875,
+      "new_value": null,
+      "source": "https://ai.google.dev/gemini-api/docs/pricing"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "google",
+      "field": "models.gemini-flash-lite.api.batch_input_per_mtok",
+      "old_value": 0.0375,
+      "new_value": 0.125,
+      "source": "https://ai.google.dev/gemini-api/docs/pricing"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "google",
+      "field": "models.gemini-flash-lite.api.batch_output_per_mtok",
+      "old_value": 0.15,
+      "new_value": 0.75,
+      "source": "https://ai.google.dev/gemini-api/docs/pricing"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "xai",
+      "field": "models.grok-4-3.api.input_per_mtok",
+      "old_value": 5,
+      "new_value": 1.25,
+      "source": "https://docs.x.ai/docs/models"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "xai",
+      "field": "models.grok-4-3.api.output_per_mtok",
+      "old_value": 25,
+      "new_value": 2.5,
+      "source": "https://docs.x.ai/docs/models"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "xai",
+      "field": "models.grok-4-3.api.cached_input_per_mtok",
+      "old_value": 1.25,
+      "new_value": null,
+      "source": "https://docs.x.ai/docs/models"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "xai",
+      "field": "models.grok-4-3.api.batch_input_per_mtok",
+      "old_value": 2.5,
+      "new_value": null,
+      "source": "https://docs.x.ai/docs/models"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "xai",
+      "field": "models.grok-4-3.api.batch_output_per_mtok",
+      "old_value": 12.5,
+      "new_value": null,
+      "source": "https://docs.x.ai/docs/models"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "xai",
+      "field": "models.grok-4-3.api.context_window_tokens",
+      "old_value": 256000,
+      "new_value": 1000000,
+      "source": "https://docs.x.ai/docs/models"
+    },
+    {
+      "timestamp": "2026-06-29T15:00:00.000Z",
+      "provider": "xai",
+      "field": "models.grok-4-3.context_window_tokens",
+      "old_value": 256000,
+      "new_value": 1000000,
+      "source": "https://docs.x.ai/docs/models"
+    },
+    {
       "timestamp": "2026-06-24T14:23:12.526Z",
       "provider": "groq",
       "field": "provider",
