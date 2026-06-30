@@ -145,6 +145,9 @@ function buildRows({ data, usage, filters }) {
         ? s.price_annual_monthly_usd : s.price_monthly_usd;
       if (price > filters.budget) continue;
       const est = s.estimated_monthly_tokens;
+      // Keep only plans whose estimated monthly capacity covers the usage profile;
+      // heavier plans qualify, plans too small for your volume are dropped.
+      if (est.input < usage.input || est.output < usage.output) continue;
       rows.push({
         key: s.id, kind: "subscription", provider_id: s.provider_id,
         provider: provName(s.provider_id), logo: provLogo(s.provider_id),
@@ -509,7 +512,7 @@ function App() {
 
       {/* COMPARISON TABLE */}
       <Section title="Cost comparison"
-        subtitle={`${rows.length} plans · API cost calculated at your usage profile · subscriptions show effective $/MTok`}>
+        subtitle={`${rows.length} plans · API cost calculated at your usage profile · subscriptions shown only when their estimated capacity covers your profile`}>
         <CompareTable rows={rows} famById={famById} sort={sort} setSort={setSort}
           pinned={pinned} togglePin={togglePin} />
       </Section>
