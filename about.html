@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — AI Token Price Calculator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background: #0b1020; }
+    ::-webkit-scrollbar { height: 10px; width: 10px; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 6px; }
+  </style>
+</head>
+<body class="text-slate-100">
+  <div class="max-w-3xl mx-auto px-4 py-10">
+
+    <header class="mb-8 flex items-start justify-between gap-4">
+      <div>
+        <h1 class="text-3xl font-bold text-white">About this calculator</h1>
+        <p class="text-slate-400 mt-1">How the AI Token Price Calculator works, and what to trust.</p>
+      </div>
+      <a href="index.html"
+        class="flex-shrink-0 mt-1 text-sm text-sky-300 hover:text-sky-200 underline underline-offset-4 whitespace-nowrap">
+        &larr; Back to calculator
+      </a>
+    </header>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold text-white mb-3">What it's for</h2>
+      <p class="text-slate-300 leading-relaxed mb-3">
+        Comparing AI costs is confusing because providers sell two very different things:
+      </p>
+      <ul class="list-disc list-inside text-slate-300 leading-relaxed space-y-1 mb-3">
+        <li><b>Subscriptions</b> — a flat monthly fee (ChatGPT Plus, Claude Pro, Gemini AI Pro, &hellip;).</li>
+        <li><b>API / pay-as-you-go</b> — metered billing per million tokens (MTok) of input and output.</li>
+      </ul>
+      <p class="text-slate-300 leading-relaxed">
+        A flat $20/month and &ldquo;$5 per million tokens&rdquo; aren't directly comparable, so it's hard to
+        answer the only question that matters: <i>for the way I actually use AI, is a subscription or the
+        API cheaper?</i> This tool normalises both onto the same yardstick so you can compare them at a glance.
+      </p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold text-white mb-3">How it works (from your point of view)</h2>
+      <ol class="list-decimal list-inside text-slate-300 leading-relaxed space-y-3">
+        <li>
+          <b>Set your usage profile.</b> Choose how many tokens you go through in a month &mdash;
+          Light / Regular / Power / Heavy presets, or enter custom input and output volumes.
+        </li>
+        <li>
+          <b>Everything is normalised to that profile:</b>
+          <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+            <li><b>API plans</b> &rarr; estimated monthly cost = <code class="text-sky-300">your input &times; input rate + your output &times; output rate</code>.</li>
+            <li><b>Subscriptions</b> &rarr; the flat monthly price, plus an <b>effective $/MTok</b> = <code class="text-sky-300">price &divide; the plan's estimated monthly token capacity</code>, so it lines up directly against API rates.</li>
+          </ul>
+        </li>
+        <li>
+          <b>Filter to what you care about</b> &mdash; model family (frontier &rarr; budget), provider,
+          plan type, billing period (monthly vs annual), and a monthly budget cap.
+        </li>
+        <li>
+          <b>Subscriptions are matched to your usage.</b> A subscription only appears if its estimated
+          monthly capacity <i>covers</i> your profile (both input and output). Plans that are too small
+          for your volume drop out; heavier plans that comfortably cover it stay in the list &mdash; so what
+          you see is always plans that could realistically handle how much you use.
+        </li>
+        <li>
+          <b>Compare side by side.</b> A sortable table shows effective $/MTok, monthly cost, context
+          window, and annual savings; pin up to 4 plans for a detailed breakdown.
+        </li>
+      </ol>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold text-white mb-3">Where the data comes from</h2>
+      <ul class="list-disc list-inside text-slate-300 leading-relaxed space-y-2">
+        <li>A roster of ~20 providers drives the dataset.</li>
+        <li>
+          An AI-driven refresh pipeline reads each provider's <b>official pricing page</b> and maps the
+          figures into a normalised schema. Two deterministic gates then check the result: one validates the
+          format and references, the other loads the app headlessly to confirm it still renders.
+        </li>
+        <li>
+          Inference hosts and aggregators (Groq, Together, Fireworks, OpenRouter, &hellip;) serve other labs'
+          models, so those entries list the underlying model with the host noted.
+        </li>
+      </ul>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold text-white mb-3">Assumptions &amp; caveats</h2>
+      <ul class="list-disc list-inside text-slate-300 leading-relaxed space-y-2">
+        <li>
+          <b>API cost</b> is modelled as <code class="text-sky-300">input &times; rate + output &times; rate</code>.
+          It does <b>not</b> account for prompt-caching discounts, batch pricing, tiered/long-context
+          surcharges, rate limits, free allowances, or taxes.
+        </li>
+        <li>
+          <b>Subscription token capacities are mostly estimates.</b> Providers rarely publish how many
+          tokens a plan includes, so most capacity figures are inferred. Each estimate carries a
+          basis/confidence label (from <code class="text-sky-300">official_statement</code> down to
+          <code class="text-sky-300">assumed</code>), and the usage-fit filter relies on these soft numbers.
+        </li>
+        <li>
+          <b>Model families and benchmarks are approximate buckets</b> for grouping, not exact capability
+          rankings.
+        </li>
+      </ul>
+    </section>
+
+    <div class="rounded-lg border border-amber-700 bg-amber-900/30 px-4 py-3 text-amber-200 leading-relaxed">
+      &#9888;&#65039; <b>Prices are indicative and intended for ballpark estimation only.</b>
+      Real-world usage will almost always land on slightly different numbers. Use this to narrow the field
+      and build intuition &mdash; then confirm the current price with the provider before making a decision.
+    </div>
+
+    <p class="mt-8">
+      <a href="index.html"
+        class="text-sm text-sky-300 hover:text-sky-200 underline underline-offset-4">
+        &larr; Back to calculator
+      </a>
+    </p>
+
+  </div>
+</body>
+</html>

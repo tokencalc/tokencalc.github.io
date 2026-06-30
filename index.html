@@ -424,9 +424,15 @@ function App() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">
-      <header className="mb-5">
-        <h1 className="text-2xl sm:text-3xl font-bold text-white">AI Token Price Calculator</h1>
-        <p className="text-slate-400 mt-1">Compare subscription vs pay-as-you-go API pricing across providers on a like-for-like basis.</p>
+      <header className="mb-5 flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">AI Token Price Calculator</h1>
+          <p className="text-slate-400 mt-1">Compare subscription vs pay-as-you-go API pricing across providers on a like-for-like basis.</p>
+        </div>
+        <a href="about.html"
+          className="flex-shrink-0 mt-1 text-sm text-sky-300 hover:text-sky-200 underline underline-offset-4 whitespace-nowrap">
+          About &amp; how it works
+        </a>
       </header>
 
       <FreshnessBanner meta={data.meta} />
