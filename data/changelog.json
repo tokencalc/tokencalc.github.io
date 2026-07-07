@@ -1,6 +1,46 @@
 {
   "changes": [
     {
+      "timestamp": "2026-07-08T12:20:00.000Z",
+      "provider": "deepinfra",
+      "field": "models.deepinfra-llama-3-3-70b.family_id",
+      "old_value": "efficient",
+      "new_value": "advanced",
+      "source": "internal-consistency: gpqa 55 fits advanced (matches Groq/Together Llama 3.3 70B)"
+    },
+    {
+      "timestamp": "2026-07-08T12:15:00.000Z",
+      "provider": "google",
+      "field": "subscriptions.google-ultra-200.included_model_families",
+      "old_value": "frontier,advanced,efficient,reasoning",
+      "new_value": "frontier,advanced,efficient",
+      "source": "internal-consistency: match declared families to included models"
+    },
+    {
+      "timestamp": "2026-07-08T12:15:00.000Z",
+      "provider": "xai",
+      "field": "subscriptions.xai-supergrok.included_model_families",
+      "old_value": "frontier,advanced",
+      "new_value": "frontier",
+      "source": "internal-consistency: match declared families to included models"
+    },
+    {
+      "timestamp": "2026-07-08T12:15:00.000Z",
+      "provider": "xai",
+      "field": "subscriptions.xai-supergrok-heavy.included_model_families",
+      "old_value": "frontier,advanced",
+      "new_value": "frontier",
+      "source": "internal-consistency: match declared families to included models"
+    },
+    {
+      "timestamp": "2026-07-08T12:15:00.000Z",
+      "provider": "perplexity",
+      "field": "subscriptions.perplexity-pro.included_model_families",
+      "old_value": "frontier,advanced",
+      "new_value": "frontier",
+      "source": "internal-consistency: match declared families to included models"
+    },
+    {
       "timestamp": "2026-06-29T17:30:00.000Z",
       "provider": "alibaba",
       "field": "models.qwen-3-7-plus",

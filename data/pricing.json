@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "2026.06.29",
-    "last_updated": "2026-07-08T12:00:00.000Z",
+    "last_updated": "2026-07-08T12:20:00.000Z",
     "sources_verified": 20,
     "pipeline_version": "1.2.0"
   },
@@ -880,7 +880,7 @@
       "id": "deepinfra-llama-3-3-70b",
       "provider_id": "deepinfra",
       "name": "Llama 3.3 70B Turbo",
-      "family_id": "efficient",
+      "family_id": "advanced",
       "context_window_tokens": 128000,
       "release_date": "2024-12-06",
       "api_string": "meta-llama/Llama-3.3-70B-Instruct-Turbo",
@@ -1830,8 +1830,7 @@
       "included_model_families": [
         "frontier",
         "advanced",
-        "efficient",
-        "reasoning"
+        "efficient"
       ],
       "included_model_ids": [
         "gemini-3-1-pro",
@@ -1872,8 +1871,7 @@
       "price_annual_monthly_usd": null,
       "annual_available": false,
       "included_model_families": [
-        "frontier",
-        "advanced"
+        "frontier"
       ],
       "included_model_ids": [
         "grok-4-3",
@@ -1912,8 +1910,7 @@
       "price_annual_monthly_usd": null,
       "annual_available": false,
       "included_model_families": [
-        "frontier",
-        "advanced"
+        "frontier"
       ],
       "included_model_ids": [
         "grok-4-3",
@@ -1993,8 +1990,7 @@
       "price_annual_monthly_usd": 16.67,
       "annual_available": true,
       "included_model_families": [
-        "frontier",
-        "advanced"
+        "frontier"
       ],
       "included_model_ids": [
         "gpt-5-5",

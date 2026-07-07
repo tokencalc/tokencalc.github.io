@@ -1,6 +1,6 @@
 {
   "version": "2026.06.29",
-  "last_updated": "2026-07-08T12:00:00.000Z",
+  "last_updated": "2026-07-08T12:20:00.000Z",
   "sources_verified": 20,
   "pipeline_version": "1.2.0",
   "sources": [
@@ -26,6 +26,41 @@
     "https://deepinfra.com/pricing"
   ],
   "changelog": [
+    {
+      "date": "2026-07-08",
+      "provider": "deepinfra",
+      "field": "models.deepinfra-llama-3-3-70b.family_id",
+      "old_value": "efficient",
+      "new_value": "advanced"
+    },
+    {
+      "date": "2026-07-08",
+      "provider": "google",
+      "field": "subscriptions.google-ultra-200.included_model_families",
+      "old_value": "frontier,advanced,efficient,reasoning",
+      "new_value": "frontier,advanced,efficient"
+    },
+    {
+      "date": "2026-07-08",
+      "provider": "xai",
+      "field": "subscriptions.xai-supergrok.included_model_families",
+      "old_value": "frontier,advanced",
+      "new_value": "frontier"
+    },
+    {
+      "date": "2026-07-08",
+      "provider": "xai",
+      "field": "subscriptions.xai-supergrok-heavy.included_model_families",
+      "old_value": "frontier,advanced",
+      "new_value": "frontier"
+    },
+    {
+      "date": "2026-07-08",
+      "provider": "perplexity",
+      "field": "subscriptions.perplexity-pro.included_model_families",
+      "old_value": "frontier,advanced",
+      "new_value": "frontier"
+    },
     {
       "date": "2026-06-29",
       "provider": "alibaba",
