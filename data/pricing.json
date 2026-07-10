@@ -1,7 +1,7 @@
 {
   "meta": {
-    "version": "2026.06.29",
-    "last_updated": "2026-07-08T12:20:00.000Z",
+    "version": "2026.07.10",
+    "last_updated": "2026-07-10T12:00:00.000Z",
     "sources_verified": 20,
     "pipeline_version": "1.2.0"
   },
@@ -169,10 +169,10 @@
     },
     {
       "id": "meta",
-      "name": "Meta (Llama)",
+      "name": "Meta",
       "logo_emoji": "♾️",
       "homepage": "https://www.llama.com",
-      "pricing_page": "https://www.llama.com",
+      "pricing_page": "https://ai.developer.meta.com/",
       "country": "US"
     },
     {
@@ -918,6 +918,21 @@
         "vision"
       ],
       "popularity_rank": 46
+    },
+    {
+      "id": "meta-muse-spark-1-1",
+      "provider_id": "meta",
+      "name": "Muse Spark 1.1",
+      "family_id": "frontier",
+      "context_window_tokens": 1000000,
+      "release_date": "2026-07-09",
+      "api_string": "muse-spark-1.1",
+      "benchmark_gpqa": 75,
+      "modalities": [
+        "text",
+        "vision"
+      ],
+      "popularity_rank": 8
     }
   ],
   "api_plans": [
@@ -1509,6 +1524,20 @@
       "context_window_tokens": 1000000,
       "notes": "Pass-through pricing (no markup) + 5.5% platform fee",
       "verified_date": "2026-06-29"
+    },
+    {
+      "id": "meta-muse-spark-1-1-api",
+      "provider_id": "meta",
+      "model_id": "meta-muse-spark-1-1",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 1.25,
+        "output_per_mtok": 4.25,
+        "cached_input_per_mtok": 0.15
+      },
+      "context_window_tokens": 1000000,
+      "notes": "Meta Model API public preview (US-only, geo-blocked). Accepts OpenAI/Anthropic request formats. Web-search grounding billed separately ($2.50/1k queries).",
+      "verified_date": "2026-07-10"
     }
   ],
   "subscription_plans": [
@@ -2297,6 +2326,84 @@
         "data_training_opt_out": true
       },
       "best_for": "Teams standardising on open models"
+    },
+    {
+      "id": "microsoft-copilot-pro",
+      "provider_id": "microsoft",
+      "name": "Copilot Pro",
+      "plan_type": "subscription",
+      "tier": "standard",
+      "price_monthly_usd": 20,
+      "price_annual_monthly_usd": null,
+      "annual_available": false,
+      "included_model_families": [
+        "frontier"
+      ],
+      "included_model_ids": [
+        "gpt-5-5"
+      ],
+      "usage_limit_description": "Individual plan; priority access to latest GPT models in Copilot apps (no published token cap)",
+      "estimated_monthly_tokens": {
+        "input": 3000000,
+        "output": 600000,
+        "basis": "assumed",
+        "confidence": "low"
+      },
+      "features": {
+        "image_generation": true,
+        "code_interpreter": false,
+        "web_search": true,
+        "deep_research": true,
+        "api_access": false,
+        "context_window": 128000,
+        "team_admin": false,
+        "data_training_opt_out": true
+      },
+      "best_for": "Individuals wanting GPT-powered Copilot across Word/Excel/Outlook and the web",
+      "comparable_plans": [
+        "openai-plus",
+        "anthropic-pro"
+      ],
+      "verified_date": "2026-07-10"
+    },
+    {
+      "id": "microsoft-365-copilot",
+      "provider_id": "microsoft",
+      "name": "Microsoft 365 Copilot",
+      "plan_type": "subscription",
+      "tier": "team",
+      "price_monthly_usd": 25.2,
+      "price_annual_monthly_usd": 18,
+      "annual_available": true,
+      "included_model_families": [
+        "frontier"
+      ],
+      "included_model_ids": [
+        "gpt-5-5"
+      ],
+      "usage_limit_description": "Business add-on ($18/user/mo annual promo through 2026-09-30, else $21; $25.20 month-to-month). Requires a Microsoft 365 Business plan.",
+      "estimated_monthly_tokens": {
+        "input": 5000000,
+        "output": 1000000,
+        "basis": "assumed",
+        "confidence": "low"
+      },
+      "features": {
+        "image_generation": true,
+        "code_interpreter": false,
+        "web_search": true,
+        "deep_research": true,
+        "api_access": false,
+        "context_window": 128000,
+        "team_admin": true,
+        "data_training_opt_out": true
+      },
+      "best_for": "Businesses embedding Copilot in Microsoft 365 apps with admin controls",
+      "comparable_plans": [
+        "openai-plus",
+        "google-ai-pro"
+      ],
+      "verified_date": "2026-07-10"
     }
   ]
 }

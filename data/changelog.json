@@ -1,6 +1,46 @@
 {
   "changes": [
     {
+      "timestamp": "2026-07-10T12:05:00.000Z",
+      "provider": "microsoft",
+      "field": "subscriptions.microsoft-copilot-pro",
+      "old_value": "(absent)",
+      "new_value": "$20/mo individual",
+      "source": "Copilot Pro list price (reporting; not on the M365 business pricing page) — fixes Microsoft rendering no rows"
+    },
+    {
+      "timestamp": "2026-07-10T12:05:00.000Z",
+      "provider": "microsoft",
+      "field": "subscriptions.microsoft-365-copilot",
+      "old_value": "(absent)",
+      "new_value": "$25.20/mo ($18/mo annual promo)",
+      "source": "microsoft.com/en-us/microsoft-365-copilot/pricing (Copilot Business add-on)"
+    },
+    {
+      "timestamp": "2026-07-10T12:00:00.000Z",
+      "provider": "meta",
+      "field": "models.meta-muse-spark-1-1",
+      "old_value": "(absent)",
+      "new_value": "Muse Spark 1.1, frontier, gpqa 75 (normalized)",
+      "source": "datacamp.com/blog/muse-spark-1-1 + byteiota.com — Meta portal geo-blocked; benchmarks mixed, GPQA-Diamond ~89.5 (v1.0) normalized to internal frontier scale, AGI Ranker 75.13"
+    },
+    {
+      "timestamp": "2026-07-10T12:00:00.000Z",
+      "provider": "meta",
+      "field": "api_plans.meta-muse-spark-1-1-api",
+      "old_value": "(absent)",
+      "new_value": "in 1.25 / out 4.25 / cached 0.15 per Mtok",
+      "source": "aiweekly.co + datacamp.com + byteiota.com (first-party page US-only geo-blocked)"
+    },
+    {
+      "timestamp": "2026-07-10T12:00:00.000Z",
+      "provider": "meta",
+      "field": "providers.meta.name",
+      "old_value": "Meta (Llama)",
+      "new_value": "Meta",
+      "source": "Meta now ships first-party Muse Spark API alongside open-weight Llama"
+    },
+    {
       "timestamp": "2026-07-08T12:20:00.000Z",
       "provider": "deepinfra",
       "field": "models.deepinfra-llama-3-3-70b.family_id",

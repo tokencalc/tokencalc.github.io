@@ -1,6 +1,6 @@
 {
-  "version": "2026.06.29",
-  "last_updated": "2026-07-08T12:20:00.000Z",
+  "version": "2026.07.10",
+  "last_updated": "2026-07-10T12:00:00.000Z",
   "sources_verified": 20,
   "pipeline_version": "1.2.0",
   "sources": [
@@ -26,6 +26,41 @@
     "https://deepinfra.com/pricing"
   ],
   "changelog": [
+    {
+      "date": "2026-07-10",
+      "provider": "microsoft",
+      "field": "subscriptions.microsoft-copilot-pro",
+      "old_value": "(absent)",
+      "new_value": "$20/mo individual"
+    },
+    {
+      "date": "2026-07-10",
+      "provider": "microsoft",
+      "field": "subscriptions.microsoft-365-copilot",
+      "old_value": "(absent)",
+      "new_value": "$25.20/mo ($18/mo annual promo)"
+    },
+    {
+      "date": "2026-07-10",
+      "provider": "meta",
+      "field": "models.meta-muse-spark-1-1",
+      "old_value": "(absent)",
+      "new_value": "Muse Spark 1.1, frontier, gpqa 75 (normalized)"
+    },
+    {
+      "date": "2026-07-10",
+      "provider": "meta",
+      "field": "api_plans.meta-muse-spark-1-1-api",
+      "old_value": "(absent)",
+      "new_value": "in 1.25 / out 4.25 / cached 0.15 per Mtok"
+    },
+    {
+      "date": "2026-07-10",
+      "provider": "meta",
+      "field": "providers.meta.name",
+      "old_value": "Meta (Llama)",
+      "new_value": "Meta"
+    },
     {
       "date": "2026-07-08",
       "provider": "deepinfra",

@@ -12,6 +12,12 @@
 </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Discourage caching of the page shell so a plain reload picks up new index.html.
+       Note: browsers apply http-equiv cache hints inconsistently and they do NOT govern
+       the pricing.json fetch — that is handled by fetch(..., { cache: "no-store" }) below. -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <title>AI Token Price Calculator</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
@@ -389,7 +395,10 @@ function App() {
   const [pinned, setPinned] = useState([]);
 
   useEffect(() => {
-    fetch("data/pricing.json")
+    // Bypass the HTTP cache: without an explicit Cache-Control header (e.g. Python's
+    // http.server sends none), browsers heuristically cache this fetch and a normal F5
+    // keeps serving a stale pricing.json. no-store forces a fresh network load every time.
+    fetch("data/pricing.json", { cache: "no-store" })
       .then((r) => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
       .then((d) => {
         setData(d);
