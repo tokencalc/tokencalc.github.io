@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VV187P3JVH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-VV187P3JVH');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Discourage caching of the page shell; the JSON fetches use { cache: "no-store" } below. -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>Estimate by Workload · AI Token Price Calculator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
+  <style>
+    body { background: #0b1020; }
+    ::-webkit-scrollbar { height: 10px; width: 10px; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 6px; }
+  </style>
+</head>
+<body class="text-slate-100">
+  <div id="root" class="min-h-screen"></div>
+
+  <script type="text/babel" data-presets="react">
+const { useState, useEffect, useMemo } = React;
+
+// ---------- helpers (shared with index.html) ----------
+const fmtUSD = (n) =>
+  n == null ? "—" : n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: n < 1 ? 4 : 2 });
+const fmtTokens = (n) => {
+  if (n == null) return "—";
+  if (n >= 1e6) return (n / 1e6).toFixed(n % 1e6 === 0 ? 0 : 1) + "M";
+  if (n >= 1e3) return (n / 1e3).toFixed(n % 1e3 === 0 ? 0 : 1) + "K";
+  return String(n);
+};
+const fmtCtx = (n) => (n >= 1e6 ? n / 1e6 + "M" : n / 1e3 + "K");
+
+const CONFIDENCE = {
+  high:   { badge: "✅ Official",   short: "✅" },
+  medium: { badge: "🟡 Estimated", short: "🟡" },
+  low:    { badge: "🔴 Assumed",   short: "🔴" },
+};
+
+function apiMonthlyCost(plan, usage) {
+  return (usage.input / 1e6) * plan.pricing.input_per_mtok +
+         (usage.output / 1e6) * plan.pricing.output_per_mtok;
+}
+
+// ---------- UI atoms ----------
+function Chip({ active, onClick, children }) {
+  return (
+    <button onClick={onClick}
+      className={"px-3 py-1.5 rounded-full text-sm border transition select-none " +
+        (active ? "border-sky-500 bg-sky-500/20 text-white" : "border-slate-700 bg-slate-800/50 text-slate-300 hover:border-slate-500")}>
+      {children}
+    </button>
+  );
+}
+function Section({ title, subtitle, children, right }) {
+  return (
+    <section className="bg-slate-900/60 border border-slate-800 rounded-2xl p-5 mb-6">
+      <div className="flex items-start justify-between gap-4 mb-4">
+        <div>
+          <h2 className="text-lg font-semibold text-white">{title}</h2>
+          {subtitle && <p className="text-sm text-slate-400 mt-0.5">{subtitle}</p>}
+        </div>
+        {right}
+      </div>
+      {children}
+    </section>
+  );
+}
+function FreshnessBanner({ meta }) {
+  const updated = new Date(meta.last_updated);
+  const ageDays = Math.floor((Date.now() - updated.getTime()) / 86400000);
+  let cls = "bg-emerald-900/40 border-emerald-700 text-emerald-200";
+  if (ageDays > 30) cls = "bg-rose-900/40 border-rose-700 text-rose-200";
+  else if (ageDays > 7) cls = "bg-amber-900/40 border-amber-700 text-amber-200";
+  const dateStr = updated.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  return (
+    <div className={"text-sm rounded-xl border px-4 py-2.5 mb-6 flex flex-wrap gap-x-2 " + cls}>
+      <span>📅 Pricing data last updated: <b>{dateStr}</b></span>
+      <span className="opacity-70">· {ageDays === 0 ? "Updated today" : ageDays + " days old"}</span>
+    </div>
+  );
+}
+
+// ---------- share-link state (URL hash) ----------
+// #q=<id>:<qty>,<id>:<qty>&pt=both&billing=monthly&plan=<kind:id>
+function parseHash() {
+  const out = { q: {}, pt: "both", billing: "monthly", plan: null };
+  const h = (location.hash || "").replace(/^#/, "");
+  if (!h) return out;
+  for (const part of h.split("&")) {
+    const eq = part.indexOf("=");
+    if (eq < 0) continue;
+    const k = part.slice(0, eq), v = decodeURIComponent(part.slice(eq + 1));
+    if (k === "q") {
+      for (const pair of v.split(",")) {
+        const c = pair.lastIndexOf(":");
+        if (c < 0) continue;
+        const id = pair.slice(0, c), qty = parseInt(pair.slice(c + 1), 10);
+        if (id && Number.isFinite(qty) && qty > 0) out.q[id] = qty;
+      }
+    } else if (k === "pt" && ["both", "subscription", "api"].includes(v)) out.pt = v;
+    else if (k === "billing" && ["monthly", "annual"].includes(v)) out.billing = v;
+    else if (k === "plan" && v) out.plan = v;
+  }
+  return out;
+}
+function buildHash({ quantities, planType, billing, selected }) {
+  const q = Object.entries(quantities).filter(([, v]) => v > 0).map(([id, v]) => `${id}:${v}`).join(",");
+  const parts = [];
+  if (q) parts.push("q=" + q);
+  if (planType !== "both") parts.push("pt=" + planType);
+  if (billing !== "monthly") parts.push("billing=" + billing);
+  if (selected) parts.push("plan=" + encodeURIComponent(selected));
+  return parts.length ? "#" + parts.join("&") : "";
+}
+
+// ---------- cost engine: build the plans that can serve this usage ----------
+function buildPlanRows({ data, usage, planType, billing }) {
+  const provName = (id) => data.providers.find((p) => p.id === id)?.name || id;
+  const provLogo = (id) => data.providers.find((p) => p.id === id)?.logo_emoji || "•";
+  const modelById = Object.fromEntries(data.models.map((m) => [m.id, m]));
+  const rows = [];
+  const hasUsage = usage.input > 0 || usage.output > 0;
+
+  if (planType !== "api") {
+    for (const s of data.subscription_plans) {
+      if (s.price_monthly_usd === 0) continue; // exclude free-tier subscriptions
+      const est = s.estimated_monthly_tokens;
+      // Only plans whose estimated monthly capacity covers the load.
+      if (est.input < usage.input || est.output < usage.output) continue;
+      const price = billing === "annual" && s.annual_available && s.price_annual_monthly_usd != null
+        ? s.price_annual_monthly_usd : s.price_monthly_usd;
+      rows.push({
+        key: "sub:" + s.id, kind: "subscription", type: "Subscription",
+        provider: provName(s.provider_id), logo: provLogo(s.provider_id), plan: s.name, price,
+        effIn: est.input ? price / (est.input / 1e6) : null,
+        effOut: est.output ? price / (est.output / 1e6) : null,
+        ctx: s.features.context_window, confidence: est.confidence,
+        notes: s.usage_limit_description,
+      });
+    }
+  }
+  if (planType !== "subscription") {
+    for (const a of data.api_plans) {
+      // Exclude free-tier models ($0 in AND out) so they can't masquerade as the cheapest option.
+      if (a.pricing.input_per_mtok === 0 && a.pricing.output_per_mtok === 0) continue;
+      const model = modelById[a.model_id];
+      const price = apiMonthlyCost(a, usage);
+      rows.push({
+        key: "api:" + a.id, kind: "api", type: "API",
+        provider: provName(a.provider_id), logo: provLogo(a.provider_id),
+        plan: model ? model.name : a.model_id, price,
+        effIn: a.pricing.input_per_mtok, effOut: a.pricing.output_per_mtok,
+        ctx: a.context_window_tokens, confidence: null, notes: a.notes,
+      });
+    }
+  }
+  return { rows, hasUsage };
+}
+
+// ---------- plans table ----------
+function PlansTable({ rows, selected, setSelected, cheapestKey }) {
+  const [sort, setSort] = useState({ key: "price", dir: 1 });
+  const sorted = useMemo(() => {
+    const arr = [...rows];
+    arr.sort((a, b) => {
+      const av = a[sort.key], bv = b[sort.key];
+      if (av == null) return 1; if (bv == null) return -1;
+      if (typeof av === "string") return sort.dir * av.localeCompare(bv);
+      return sort.dir * (av - bv);
+    });
+    return arr;
+  }, [rows, sort]);
+  const onSort = (k) => setSort((s) => s.key === k ? { key: k, dir: -s.dir } : { key: k, dir: 1 });
+  const arrow = (k) => sort.key === k ? (sort.dir === 1 ? " ▲" : " ▼") : "";
+  const cols = [
+    { k: "provider", label: "Provider" },
+    { k: "plan", label: "Plan" },
+    { k: "type", label: "Type" },
+    { k: "price", label: "Monthly $" },
+    { k: "effIn", label: "$/MTok in" },
+    { k: "effOut", label: "$/MTok out" },
+    { k: "ctx", label: "Context" },
+  ];
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full text-sm min-w-[760px]">
+        <thead>
+          <tr className="text-left text-slate-400 border-b border-slate-700">
+            <th className="py-2 px-2 w-8"></th>
+            {cols.map((c) => (
+              <th key={c.k} onClick={() => onSort(c.k)} className="py-2 px-2 whitespace-nowrap cursor-pointer hover:text-white">
+                {c.label}{arrow(c.k)}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {sorted.map((r) => {
+            const isCheapest = r.key === cheapestKey;
+            const isSel = r.key === selected;
+            return (
+              <tr key={r.key}
+                  onClick={() => setSelected(r.key)}
+                  className={"border-b border-slate-800 cursor-pointer hover:bg-slate-800/40 " + (isSel ? "bg-sky-900/30" : "")}>
+                <td className="px-2">
+                  <input type="radio" name="plan" checked={isSel} onChange={() => setSelected(r.key)} className="accent-sky-500 w-4 h-4" />
+                </td>
+                <td className="py-2 px-2 whitespace-nowrap"><span className="mr-1">{r.logo}</span>{r.provider}</td>
+                <td className="py-2 px-2 whitespace-nowrap font-medium text-white">
+                  {r.plan}{isCheapest && <span className="ml-2 text-[10px] px-1.5 py-0.5 rounded bg-emerald-900/60 text-emerald-300">cheapest</span>}
+                </td>
+                <td className="py-2 px-2">
+                  <span className={"text-xs px-1.5 py-0.5 rounded " +
+                    (r.type === "API" ? "bg-indigo-900/60 text-indigo-300" : "bg-teal-900/60 text-teal-300")}>{r.type}</span>
+                </td>
+                <td className={"py-2 px-2 whitespace-nowrap " + (isCheapest ? "text-emerald-400 font-semibold" : "")}>{fmtUSD(r.price)}</td>
+                <td className="py-2 px-2 whitespace-nowrap text-slate-300">
+                  {fmtUSD(r.effIn)}{r.confidence && <span className="ml-1 text-[10px] opacity-70">{CONFIDENCE[r.confidence].short}</span>}
+                </td>
+                <td className="py-2 px-2 whitespace-nowrap text-slate-300">{fmtUSD(r.effOut)}</td>
+                <td className="py-2 px-2 whitespace-nowrap text-slate-300">{fmtCtx(r.ctx)}</td>
+              </tr>
+            );
+          })}
+          {sorted.length === 0 && (
+            <tr><td colSpan={8} className="text-center text-slate-500 py-8">No plans available for this configuration.</td></tr>
+          )}
+        </tbody>
+      </table>
+      <p className="text-xs text-slate-500 mt-3">
+        Subscriptions appear only when their estimated monthly capacity covers your load; the flat plan price is shown
+        (<i>effective</i> $/MTok = price ÷ estimated capacity, confidence badge shown). API rows are priced at your exact
+        computed volume using published $/MTok. Click a row to select it as your plan.
+      </p>
+    </div>
+  );
+}
+
+// ---------- app ----------
+function App() {
+  const [data, setData] = useState(null);
+  const [workloads, setWorkloads] = useState(null);
+  const [err, setErr] = useState(null);
+
+  const init = useMemo(() => parseHash(), []);
+  const [quantities, setQuantities] = useState(init.q);
+  const [planType, setPlanType] = useState(init.pt);
+  const [billing, setBilling] = useState(init.billing);
+  const [selected, setSelected] = useState(init.plan);
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    Promise.all([
+      fetch("data/pricing.json", { cache: "no-store" }).then((r) => { if (!r.ok) throw new Error("pricing.json HTTP " + r.status); return r.json(); }),
+      fetch("data/workloads.json", { cache: "no-store" }).then((r) => { if (!r.ok) throw new Error("workloads.json HTTP " + r.status); return r.json(); }),
+    ]).then(([p, w]) => { setData(p); setWorkloads(w); }).catch((e) => setErr(e.message));
+  }, []);
+
+  // usage profile derived from workload quantities
+  const usage = useMemo(() => {
+    let input = 0, output = 0;
+    if (workloads) for (const wl of workloads.workloads) {
+      const q = quantities[wl.id] || 0;
+      input += q * wl.input_tokens; output += q * wl.output_tokens;
+    }
+    return { input, output };
+  }, [workloads, quantities]);
+
+  const { rows, hasUsage } = useMemo(
+    () => data ? buildPlanRows({ data, usage, planType, billing }) : { rows: [], hasUsage: false },
+    [data, usage, planType, billing]);
+
+  const cheapest = useMemo(() => rows.reduce((m, r) => (m == null || r.price < m.price ? r : m), null), [rows]);
+  const cheapestKey = cheapest?.key || null;
+  const selectedRow = rows.find((r) => r.key === selected) || cheapest || null;
+
+  // keep the URL hash in sync so the address bar is always shareable
+  useEffect(() => {
+    if (!workloads) return;
+    const hash = buildHash({ quantities, planType, billing, selected: selectedRow?.key || null });
+    history.replaceState(null, "", location.pathname + location.search + hash);
+  }, [quantities, planType, billing, selectedRow, workloads]);
+
+  const setQty = (id, v) => setQuantities((q) => {
+    const n = Math.max(0, Math.floor(+v || 0));
+    const next = { ...q };
+    if (n > 0) next[id] = n; else delete next[id];
+    return next;
+  });
+  const copyLink = async () => {
+    try { await navigator.clipboard.writeText(location.href); setCopied(true); setTimeout(() => setCopied(false), 2000); }
+    catch { setCopied(false); }
+  };
+
+  if (err) return (
+    <div className="max-w-2xl mx-auto p-8 mt-10 bg-rose-950/50 border border-rose-800 rounded-xl">
+      <h1 className="text-xl font-bold text-rose-200">Could not load data</h1>
+      <p className="text-rose-300 mt-2 text-sm">{err}</p>
+      <p className="text-slate-300 mt-4 text-sm">Serve the folder over HTTP, e.g. <code>python -m http.server 8000</code>.</p>
+    </div>
+  );
+  if (!data || !workloads) return <div className="p-10 text-slate-400">Loading…</div>;
+
+  const totalTasks = Object.values(quantities).reduce((a, b) => a + b, 0);
+
+  return (
+    <div className="max-w-5xl mx-auto px-4 py-6">
+      <header className="mb-5">
+        <h1 className="text-2xl sm:text-3xl font-bold text-white">Estimate by Workload</h1>
+        <p className="text-slate-400 mt-1">Count the tasks you run each month — we convert them to tokens and find a plan that covers the load.</p>
+      </header>
+
+      <nav className="mb-6 flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-slate-800 pb-4 text-lg">
+        <a href="index.html" className="text-white font-semibold hover:text-sky-300">Full comparison</a>
+        <a href="workload.html" className="text-sky-400 font-semibold underline underline-offset-4">Estimate by workload</a>
+        <a href="about.html" className="text-white font-semibold hover:text-sky-300">About</a>
+      </nav>
+
+      {/* WORKLOAD BUILDER */}
+      <Section title="Your monthly workload"
+        subtitle="Enter how many of each task you run per month. Per-task token estimates are indicative — see the notes.">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm min-w-[640px]">
+            <thead>
+              <tr className="text-left text-slate-400 border-b border-slate-700">
+                <th className="py-2 px-2">Workload</th>
+                <th className="py-2 px-2 text-right">Tokens in / task</th>
+                <th className="py-2 px-2 text-right">Tokens out / task</th>
+                <th className="py-2 px-2 text-right">Quantity / month</th>
+                <th className="py-2 px-2 text-right">Subtotal (in / out)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {workloads.workloads.map((wl) => {
+                const q = quantities[wl.id] || 0;
+                return (
+                  <tr key={wl.id} className="border-b border-slate-800 align-top">
+                    <td className="py-2.5 px-2">
+                      <div className="font-medium text-white">{wl.label} <span className="text-xs text-slate-500">/ {wl.unit}</span>
+                        <span className="ml-1.5 text-[10px]" title={"Confidence: " + wl.confidence}>{CONFIDENCE[wl.confidence].short}</span></div>
+                      {wl.note && <div className="text-xs text-slate-500 mt-0.5 max-w-md">{wl.note}</div>}
+                    </td>
+                    <td className="py-2.5 px-2 text-right text-slate-300 whitespace-nowrap">{fmtTokens(wl.input_tokens)}</td>
+                    <td className="py-2.5 px-2 text-right text-slate-300 whitespace-nowrap">{fmtTokens(wl.output_tokens)}</td>
+                    <td className="py-2.5 px-2 text-right">
+                      <input type="number" min="0" step="1" value={q || ""}
+                        onChange={(e) => setQty(wl.id, e.target.value)} placeholder="0"
+                        className="bg-slate-800 border border-slate-700 rounded px-2 py-1 w-28 text-right text-white" />
+                    </td>
+                    <td className="py-2.5 px-2 text-right whitespace-nowrap text-slate-300">
+                      {q > 0 ? <span>{fmtTokens(q * wl.input_tokens)} / {fmtTokens(q * wl.output_tokens)}</span> : <span className="text-slate-600">—</span>}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+            <tfoot>
+              <tr className="text-white font-semibold">
+                <td className="py-3 px-2" colSpan={3}>Total monthly tokens</td>
+                <td className="py-3 px-2 text-right text-slate-400 font-normal whitespace-nowrap">{totalTasks.toLocaleString()} tasks</td>
+                <td className="py-3 px-2 text-right whitespace-nowrap">{fmtTokens(usage.input)} in / {fmtTokens(usage.output)} out</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </Section>
+
+      {/* PLANS */}
+      <Section title="Plans that cover this load"
+        subtitle="Subscriptions whose capacity covers your total, plus every API plan priced at your exact volume."
+        right={
+          <div className="flex flex-wrap gap-2">
+            {[["both","Both"],["subscription","Subscription"],["api","API"]].map(([k,l]) => (
+              <Chip key={k} active={planType===k} onClick={() => setPlanType(k)}>{l}</Chip>
+            ))}
+            {[["monthly","Monthly"],["annual","Annual"]].map(([k,l]) => (
+              <Chip key={k} active={billing===k} onClick={() => setBilling(k)}>{l}</Chip>
+            ))}
+          </div>
+        }>
+        {!hasUsage
+          ? <p className="text-slate-500 text-sm py-6 text-center">Add at least one workload above to see plans and pricing.</p>
+          : <PlansTable rows={rows} selected={selectedRow?.key || null} setSelected={setSelected} cheapestKey={cheapestKey} />}
+      </Section>
+
+      {/* ESTIMATE SUMMARY */}
+      <Section title="Your estimate"
+        right={
+          <button onClick={copyLink}
+            className="px-3 py-1.5 rounded-lg text-sm border border-sky-600 bg-sky-600/20 text-sky-200 hover:bg-sky-600/30 whitespace-nowrap">
+            {copied ? "✅ Copied!" : "🔗 Copy share link"}
+          </button>
+        }>
+        {!hasUsage ? (
+          <p className="text-slate-500 text-sm">Nothing selected yet — build a workload above.</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+              <div className="text-xs uppercase tracking-wide text-slate-500">Monthly volume</div>
+              <div className="text-xl font-bold text-white mt-1">{fmtTokens(usage.input)} <span className="text-sm font-normal text-slate-400">in</span></div>
+              <div className="text-xl font-bold text-white">{fmtTokens(usage.output)} <span className="text-sm font-normal text-slate-400">out</span></div>
+              <div className="text-xs text-slate-500 mt-1">{totalTasks.toLocaleString()} tasks / month</div>
+            </div>
+            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+              <div className="text-xs uppercase tracking-wide text-slate-500">Selected plan</div>
+              <div className="text-lg font-bold text-white mt-1">{selectedRow ? selectedRow.logo + " " + selectedRow.plan : "—"}</div>
+              <div className="text-xs text-slate-400 mt-0.5">{selectedRow ? selectedRow.provider + " · " + selectedRow.type : ""}</div>
+            </div>
+            <div className="bg-emerald-900/20 border border-emerald-800 rounded-xl p-4">
+              <div className="text-xs uppercase tracking-wide text-emerald-500/80">Estimated total</div>
+              <div className="text-3xl font-bold text-emerald-300 mt-1">{selectedRow ? fmtUSD(selectedRow.price) : "—"}</div>
+              <div className="text-xs text-emerald-500/70 mt-0.5">per month{billing === "annual" ? " (annual billing)" : ""}</div>
+              {cheapest && selectedRow && selectedRow.key !== cheapest.key &&
+                <div className="text-xs text-amber-300/90 mt-2">Cheapest that covers: {cheapest.logo} {cheapest.plan} — {fmtUSD(cheapest.price)}/mo</div>}
+            </div>
+          </div>
+        )}
+      </Section>
+
+      <FreshnessBanner meta={data.meta} />
+
+      <footer className="text-xs text-slate-600 py-6 text-center">
+        Pricing v{data.meta.version} · workloads v{workloads.meta.version} · figures are indicative estimates, not quotes.
+        Repo-refactor is a floor per MB (agents re-read files). Verify against provider pricing before committing spend.
+      </footer>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>

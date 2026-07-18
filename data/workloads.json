@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "version": "2026.07.18",
+    "last_updated": "2026-07-18T14:00:00.000Z",
+    "note": "Indicative per-task token estimates sourced from provider tokenization docs (see workload-estimates.md). Real usage varies with prompt design, image resolution, retrieval depth, and agent re-reads."
+  },
+  "workloads": [
+    {
+      "id": "image-process",
+      "label": "Process an image",
+      "unit": "image",
+      "input_tokens": 1200,
+      "output_tokens": 150,
+      "confidence": "medium",
+      "note": "Describe/classify/caption a ~1 MP image (≈765–1,521 tok across providers) plus a short prompt; short answer out."
+    },
+    {
+      "id": "text-page",
+      "label": "Process a page of text",
+      "unit": "page",
+      "input_tokens": 800,
+      "output_tokens": 200,
+      "confidence": "high",
+      "note": "Summarize/analyze a ~500-word page (~650 tok) plus a ~150-tok system prompt; short summary out."
+    },
+    {
+      "id": "pdf-extract",
+      "label": "Extract data from a PDF page",
+      "unit": "page",
+      "input_tokens": 1100,
+      "output_tokens": 250,
+      "confidence": "medium",
+      "note": "Digital page text (~650–800) plus an extraction schema (~300); structured JSON out. A scanned page is priced as an image (~1,800 in)."
+    },
+    {
+      "id": "image-extract",
+      "label": "Extract data from an image",
+      "unit": "file",
+      "input_tokens": 1800,
+      "output_tokens": 250,
+      "confidence": "medium",
+      "note": "Receipt/invoice/form: high-detail image for legibility (~1,500) plus schema prompt (~300); structured JSON out."
+    },
+    {
+      "id": "rag-query",
+      "label": "RAG pipeline query",
+      "unit": "query",
+      "input_tokens": 3000,
+      "output_tokens": 350,
+      "confidence": "medium",
+      "note": "System (~300) + query (~50) + 5 retrieved chunks × ~500 tok (~2,500); grounded answer out. Prompt caching can cut repeated context."
+    },
+    {
+      "id": "repo-refactor",
+      "label": "Refactor a repo",
+      "unit": "MB",
+      "input_tokens": 250000,
+      "output_tokens": 75000,
+      "confidence": "low",
+      "note": "1 MB of source ≈ 250k tok in (~4 chars/tok); ~30% rewritten as edits/diffs out. Floor per MB — agentic loops re-read files, often 2–4× the input."
+    }
+  ]
+}
