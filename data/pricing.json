@@ -1,8 +1,8 @@
 {
   "meta": {
-    "version": "2026.07.10",
-    "last_updated": "2026-07-10T12:00:00.000Z",
-    "sources_verified": 20,
+    "version": "2026.07.18",
+    "last_updated": "2026-07-18T12:00:00.000Z",
+    "sources_verified": 4,
     "pipeline_version": "1.2.0"
   },
   "model_families": [
@@ -933,6 +933,66 @@
         "vision"
       ],
       "popularity_rank": 8
+    },
+    {
+      "id": "claude-fable-5",
+      "provider_id": "anthropic",
+      "name": "Claude Fable 5",
+      "family_id": "frontier",
+      "context_window_tokens": 1000000,
+      "release_date": "2026-06-09",
+      "api_string": "claude-fable-5",
+      "benchmark_gpqa": 79,
+      "modalities": [
+        "text",
+        "vision"
+      ],
+      "popularity_rank": 4
+    },
+    {
+      "id": "claude-sonnet-5",
+      "provider_id": "anthropic",
+      "name": "Claude Sonnet 5",
+      "family_id": "frontier",
+      "context_window_tokens": 1000000,
+      "release_date": "2026-06-30",
+      "api_string": "claude-sonnet-5",
+      "benchmark_gpqa": 73,
+      "modalities": [
+        "text",
+        "vision"
+      ],
+      "popularity_rank": 2
+    },
+    {
+      "id": "gpt-5-6",
+      "provider_id": "openai",
+      "name": "GPT-5.6 Sol",
+      "family_id": "frontier",
+      "context_window_tokens": 1000000,
+      "release_date": "2026-07-09",
+      "api_string": "gpt-5.6-sol",
+      "benchmark_gpqa": 78,
+      "modalities": [
+        "text",
+        "vision"
+      ],
+      "popularity_rank": 3
+    },
+    {
+      "id": "grok-4-5",
+      "provider_id": "xai",
+      "name": "Grok 4.5",
+      "family_id": "frontier",
+      "context_window_tokens": 500000,
+      "release_date": "2026-07-08",
+      "api_string": "grok-4.5",
+      "benchmark_gpqa": 78.5,
+      "modalities": [
+        "text",
+        "vision"
+      ],
+      "popularity_rank": 6
     }
   ],
   "api_plans": [
@@ -950,7 +1010,7 @@
       },
       "context_window_tokens": 1000000,
       "notes": "50% batch discount available",
-      "verified_date": "2026-06-29"
+      "verified_date": "2026-07-18"
     },
     {
       "id": "anthropic-sonnet-4-6-api",
@@ -966,7 +1026,7 @@
       },
       "context_window_tokens": 1000000,
       "notes": "50% batch discount available",
-      "verified_date": "2026-06-29"
+      "verified_date": "2026-07-18"
     },
     {
       "id": "anthropic-haiku-4-5-api",
@@ -982,7 +1042,7 @@
       },
       "context_window_tokens": 200000,
       "notes": "",
-      "verified_date": "2026-06-29"
+      "verified_date": "2026-07-18"
     },
     {
       "id": "openai-gpt-5-5-api",
@@ -998,7 +1058,7 @@
       },
       "context_window_tokens": 400000,
       "notes": "",
-      "verified_date": "2026-06-29"
+      "verified_date": "2026-07-18"
     },
     {
       "id": "openai-gpt-5-4-api",
@@ -1014,7 +1074,7 @@
       },
       "context_window_tokens": 400000,
       "notes": "",
-      "verified_date": "2026-06-29"
+      "verified_date": "2026-07-18"
     },
     {
       "id": "openai-gpt-4-1-api",
@@ -1077,7 +1137,7 @@
       },
       "context_window_tokens": 2000000,
       "notes": "Higher price tier above 200K context",
-      "verified_date": "2026-06-29"
+      "verified_date": "2026-07-18"
     },
     {
       "id": "google-gemini-3-5-flash-api",
@@ -1093,7 +1153,7 @@
       },
       "context_window_tokens": 1000000,
       "notes": "",
-      "verified_date": "2026-06-29"
+      "verified_date": "2026-07-18"
     },
     {
       "id": "google-gemini-flash-lite-api",
@@ -1108,7 +1168,7 @@
       },
       "context_window_tokens": 1000000,
       "notes": "Lowest cost per token in dataset",
-      "verified_date": "2026-06-29"
+      "verified_date": "2026-07-18"
     },
     {
       "id": "xai-grok-4-3-api",
@@ -1121,7 +1181,7 @@
       },
       "context_window_tokens": 1000000,
       "notes": "",
-      "verified_date": "2026-06-29"
+      "verified_date": "2026-07-18"
     },
     {
       "id": "xai-grok-4-20-api",
@@ -1134,7 +1194,7 @@
       },
       "context_window_tokens": 1000000,
       "notes": "Grok 4.20 (0309); reasoning and non-reasoning variants share this pricing.",
-      "verified_date": "2026-06-29"
+      "verified_date": "2026-07-18"
     },
     {
       "id": "deepseek-v4-pro-api",
@@ -1538,6 +1598,60 @@
       "context_window_tokens": 1000000,
       "notes": "Meta Model API public preview (US-only, geo-blocked). Accepts OpenAI/Anthropic request formats. Web-search grounding billed separately ($2.50/1k queries).",
       "verified_date": "2026-07-10"
+    },
+    {
+      "id": "anthropic-fable-5-api",
+      "provider_id": "anthropic",
+      "model_id": "claude-fable-5",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 10,
+        "output_per_mtok": 50
+      },
+      "context_window_tokens": 1000000,
+      "notes": "Prompt caching and 50% Batch API discount available (rates per Anthropic pricing page).",
+      "verified_date": "2026-07-18"
+    },
+    {
+      "id": "anthropic-sonnet-5-api",
+      "provider_id": "anthropic",
+      "model_id": "claude-sonnet-5",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 3,
+        "output_per_mtok": 15
+      },
+      "context_window_tokens": 1000000,
+      "notes": "Standard list pricing; introductory $2/$10 per MTok through 2026-08-31.",
+      "verified_date": "2026-07-18"
+    },
+    {
+      "id": "openai-gpt-5-6-api",
+      "provider_id": "openai",
+      "model_id": "gpt-5-6",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 5,
+        "output_per_mtok": 30,
+        "cached_input_per_mtok": 0.5
+      },
+      "context_window_tokens": 1000000,
+      "notes": "GPT-5.6 Sol tier; Terra ($2.50/$15) and Luna ($1/$6) share the family.",
+      "verified_date": "2026-07-18"
+    },
+    {
+      "id": "xai-grok-4-5-api",
+      "provider_id": "xai",
+      "model_id": "grok-4-5",
+      "plan_type": "api",
+      "pricing": {
+        "input_per_mtok": 2,
+        "output_per_mtok": 6,
+        "cached_input_per_mtok": 0.5
+      },
+      "context_window_tokens": 500000,
+      "notes": "Pricing for <200k context; >=200k context is $4/$12 per MTok.",
+      "verified_date": "2026-07-18"
     }
   ],
   "subscription_plans": [
@@ -1558,7 +1672,8 @@
       "included_model_ids": [
         "claude-opus-4-8",
         "claude-sonnet-4-6",
-        "claude-haiku-4-5"
+        "claude-haiku-4-5",
+        "claude-sonnet-5"
       ],
       "usage_limit_description": "~5× free usage bucket",
       "estimated_monthly_tokens": {
@@ -1601,7 +1716,9 @@
       "included_model_ids": [
         "claude-opus-4-8",
         "claude-sonnet-4-6",
-        "claude-haiku-4-5"
+        "claude-haiku-4-5",
+        "claude-fable-5",
+        "claude-sonnet-5"
       ],
       "usage_limit_description": "5× Pro usage bucket",
       "estimated_monthly_tokens": {
@@ -1644,7 +1761,9 @@
       "included_model_ids": [
         "claude-opus-4-8",
         "claude-sonnet-4-6",
-        "claude-haiku-4-5"
+        "claude-haiku-4-5",
+        "claude-fable-5",
+        "claude-sonnet-5"
       ],
       "usage_limit_description": "20× Pro usage bucket",
       "estimated_monthly_tokens": {
@@ -1689,7 +1808,8 @@
         "gpt-5-5",
         "gpt-5-4",
         "gpt-4-1",
-        "o3"
+        "o3",
+        "gpt-5-6"
       ],
       "usage_limit_description": "Standard message caps on GPT-5.5 / o3",
       "estimated_monthly_tokens": {
@@ -1734,7 +1854,8 @@
         "gpt-5-5",
         "gpt-5-4",
         "gpt-4-1",
-        "o3"
+        "o3",
+        "gpt-5-6"
       ],
       "usage_limit_description": "Expanded caps, higher o3 limits",
       "estimated_monthly_tokens": {
@@ -1778,7 +1899,8 @@
         "gpt-5-5",
         "gpt-5-4",
         "gpt-4-1",
-        "o3"
+        "o3",
+        "gpt-5-6"
       ],
       "usage_limit_description": "Near-unlimited GPT-5.5, o3 Pro mode",
       "estimated_monthly_tokens": {
@@ -1904,7 +2026,8 @@
       ],
       "included_model_ids": [
         "grok-4-3",
-        "grok-4-20"
+        "grok-4-20",
+        "grok-4-5"
       ],
       "usage_limit_description": "Expanded Grok limits + voice",
       "estimated_monthly_tokens": {
@@ -1943,7 +2066,8 @@
       ],
       "included_model_ids": [
         "grok-4-3",
-        "grok-4-20"
+        "grok-4-20",
+        "grok-4-5"
       ],
       "usage_limit_description": "Grok Heavy multi-agent mode",
       "estimated_monthly_tokens": {
