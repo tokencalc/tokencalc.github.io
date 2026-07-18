@@ -1,6 +1,70 @@
 {
   "changes": [
     {
+      "timestamp": "2026-07-18T14:00:00.000Z",
+      "provider": "(schema)",
+      "field": "models.*.benchmark_gpqa",
+      "old_value": "single derived value labelled GPQA",
+      "new_value": "split into tier_score (derived, buckets tiers) + benchmark_gpqa_real (real published GPQA-Diamond %, shown in UI, null if unsourced)",
+      "source": "GPQA-Diamond is saturated (~88-95% across frontier models); real numbers now published while a derived tier_score preserves the capability/price buckets"
+    },
+    {
+      "timestamp": "2026-07-18T14:00:00.000Z",
+      "provider": "(schema)",
+      "field": "model_families.reasoning.gpqa_range",
+      "old_value": "50-100",
+      "new_value": "50.5-100",
+      "source": "tier recalibration to current lineup tier_scores"
+    },
+    {
+      "timestamp": "2026-07-18T14:00:00.000Z",
+      "provider": "(schema)",
+      "field": "model_families.budget.gpqa_range",
+      "old_value": "0-35",
+      "new_value": "0-36.5",
+      "source": "tier recalibration to current lineup tier_scores"
+    },
+    {
+      "timestamp": "2026-07-18T14:00:00.000Z",
+      "provider": "(schema)",
+      "field": "model_families.efficient.gpqa_range",
+      "old_value": "35-50",
+      "new_value": "36.5-50.5",
+      "source": "tier recalibration to current lineup tier_scores"
+    },
+    {
+      "timestamp": "2026-07-18T14:00:00.000Z",
+      "provider": "(schema)",
+      "field": "model_families.advanced.gpqa_range",
+      "old_value": "50-65",
+      "new_value": "50.5-67",
+      "source": "tier recalibration to current lineup tier_scores"
+    },
+    {
+      "timestamp": "2026-07-18T14:00:00.000Z",
+      "provider": "(schema)",
+      "field": "model_families.frontier.gpqa_range",
+      "old_value": "65-100",
+      "new_value": "67-100",
+      "source": "tier recalibration to current lineup tier_scores"
+    },
+    {
+      "timestamp": "2026-07-18T13:00:00.000Z",
+      "provider": "xai",
+      "field": "models.grok-4-5.benchmark_gpqa",
+      "old_value": 78.5,
+      "new_value": 78,
+      "source": "benchlm.ai/benchmarks/gpqaDiamond (2026-07-18): GPQA-D saturated ~91-95 at top; Opus 4.8=93.6, GPT-5.5=93.6, GPT-5.6=94.6; Fable 5 ties/below Opus, not #1"
+    },
+    {
+      "timestamp": "2026-07-18T13:00:00.000Z",
+      "provider": "anthropic",
+      "field": "models.claude-fable-5.benchmark_gpqa",
+      "old_value": 79,
+      "new_value": 78,
+      "source": "benchlm.ai/benchmarks/gpqaDiamond (2026-07-18): GPQA-D saturated ~91-95 at top; Opus 4.8=93.6, GPT-5.5=93.6, GPT-5.6=94.6; Fable 5 ties/below Opus, not #1"
+    },
+    {
       "timestamp": "2026-07-18T12:00:00.000Z",
       "provider": "anthropic",
       "field": "models.claude-fable-5",

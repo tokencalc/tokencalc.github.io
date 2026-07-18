@@ -13,7 +13,7 @@
       "color": "#ef4444",
       "description": "State-of-the-art reasoning. Best for complex research, agent workflows.",
       "gpqa_range": [
-        65,
+        67,
         100
       ]
     },
@@ -24,8 +24,8 @@
       "color": "#f97316",
       "description": "Strong capability, production-grade balance of cost and quality.",
       "gpqa_range": [
-        50,
-        65
+        50.5,
+        67
       ]
     },
     {
@@ -35,8 +35,8 @@
       "color": "#eab308",
       "description": "Faster and cheaper; good for most everyday tasks.",
       "gpqa_range": [
-        35,
-        50
+        36.5,
+        50.5
       ]
     },
     {
@@ -47,7 +47,7 @@
       "description": "Lowest cost, highest throughput; simple tasks, high volume.",
       "gpqa_range": [
         0,
-        35
+        36.5
       ]
     },
     {
@@ -57,7 +57,7 @@
       "color": "#3b82f6",
       "description": "Dedicated chain-of-thought models with thinking budgets.",
       "gpqa_range": [
-        50,
+        50.5,
         100
       ]
     }
@@ -233,7 +233,8 @@
       "context_window_tokens": 1000000,
       "release_date": "2026-05-15",
       "api_string": "claude-opus-4-8",
-      "benchmark_gpqa": 78.2,
+      "tier_score": 78.2,
+      "benchmark_gpqa_real": 93.6,
       "modalities": [
         "text",
         "vision"
@@ -248,7 +249,8 @@
       "context_window_tokens": 200000,
       "release_date": "2026-03-10",
       "api_string": "claude-opus-4-7",
-      "benchmark_gpqa": 75.9,
+      "tier_score": 75.9,
+      "benchmark_gpqa_real": 94.2,
       "modalities": [
         "text",
         "vision"
@@ -263,7 +265,8 @@
       "context_window_tokens": 1000000,
       "release_date": "2026-02-01",
       "api_string": "claude-sonnet-4-6",
-      "benchmark_gpqa": 58.4,
+      "tier_score": 58.4,
+      "benchmark_gpqa_real": 89.9,
       "modalities": [
         "text",
         "vision"
@@ -278,7 +281,8 @@
       "context_window_tokens": 200000,
       "release_date": "2025-10-01",
       "api_string": "claude-haiku-4-5",
-      "benchmark_gpqa": 42.1,
+      "tier_score": 42.1,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text",
         "vision"
@@ -293,7 +297,8 @@
       "context_window_tokens": 400000,
       "release_date": "2026-04-20",
       "api_string": "gpt-5.5",
-      "benchmark_gpqa": 77.5,
+      "tier_score": 77.5,
+      "benchmark_gpqa_real": 93.6,
       "modalities": [
         "text",
         "vision"
@@ -308,7 +313,8 @@
       "context_window_tokens": 400000,
       "release_date": "2026-01-15",
       "api_string": "gpt-5.4",
-      "benchmark_gpqa": 62,
+      "tier_score": 62,
+      "benchmark_gpqa_real": 92.8,
       "modalities": [
         "text",
         "vision"
@@ -323,7 +329,8 @@
       "context_window_tokens": 1000000,
       "release_date": "2025-04-14",
       "api_string": "gpt-4.1",
-      "benchmark_gpqa": 46.3,
+      "tier_score": 46.3,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text",
         "vision"
@@ -338,7 +345,8 @@
       "context_window_tokens": 1000000,
       "release_date": "2025-04-14",
       "api_string": "gpt-4.1-nano",
-      "benchmark_gpqa": 28.6,
+      "tier_score": 28.6,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text"
       ],
@@ -352,7 +360,8 @@
       "context_window_tokens": 200000,
       "release_date": "2025-04-16",
       "api_string": "o3",
-      "benchmark_gpqa": 83.3,
+      "tier_score": 83.3,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text",
         "vision"
@@ -367,7 +376,8 @@
       "context_window_tokens": 2000000,
       "release_date": "2026-03-25",
       "api_string": "gemini-3.1-pro",
-      "benchmark_gpqa": 76.8,
+      "tier_score": 76.8,
+      "benchmark_gpqa_real": 94.3,
       "modalities": [
         "text",
         "vision",
@@ -383,7 +393,8 @@
       "context_window_tokens": 1000000,
       "release_date": "2026-02-18",
       "api_string": "gemini-3.5-flash",
-      "benchmark_gpqa": 54.7,
+      "tier_score": 54.7,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text",
         "vision",
@@ -399,7 +410,8 @@
       "context_window_tokens": 1000000,
       "release_date": "2025-09-01",
       "api_string": "gemini-flash",
-      "benchmark_gpqa": 44,
+      "tier_score": 44,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text",
         "vision"
@@ -414,7 +426,8 @@
       "context_window_tokens": 1000000,
       "release_date": "2025-09-01",
       "api_string": "gemini-flash-lite",
-      "benchmark_gpqa": 31.2,
+      "tier_score": 31.2,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text",
         "vision"
@@ -429,7 +442,8 @@
       "context_window_tokens": 1000000,
       "release_date": "2026-04-01",
       "api_string": "grok-4.3",
-      "benchmark_gpqa": 74.5,
+      "tier_score": 74.5,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text",
         "vision"
@@ -444,7 +458,8 @@
       "context_window_tokens": 1000000,
       "release_date": "2026-03-09",
       "api_string": "grok-4.20",
-      "benchmark_gpqa": 77.6,
+      "tier_score": 77.6,
+      "benchmark_gpqa_real": 88.5,
       "modalities": [
         "text",
         "vision"
@@ -459,7 +474,8 @@
       "context_window_tokens": 1000000,
       "release_date": "2026-03-01",
       "api_string": "deepseek-v4-pro",
-      "benchmark_gpqa": 71,
+      "tier_score": 71,
+      "benchmark_gpqa_real": 90.1,
       "modalities": [
         "text"
       ],
@@ -473,7 +489,8 @@
       "context_window_tokens": 128000,
       "release_date": "2025-12-10",
       "api_string": "deepseek-v3.2",
-      "benchmark_gpqa": 56.3,
+      "tier_score": 56.3,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text"
       ],
@@ -487,7 +504,8 @@
       "context_window_tokens": 1000000,
       "release_date": "2026-03-01",
       "api_string": "deepseek-v4-flash",
-      "benchmark_gpqa": 33,
+      "tier_score": 33,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text"
       ],
@@ -501,7 +519,8 @@
       "context_window_tokens": 1000000,
       "release_date": "2026-02-28",
       "api_string": "qwen3.7-max",
-      "benchmark_gpqa": 70.2,
+      "tier_score": 70.2,
+      "benchmark_gpqa_real": 92.4,
       "modalities": [
         "text",
         "vision"
@@ -516,7 +535,8 @@
       "context_window_tokens": 256000,
       "release_date": "2026-05-26",
       "api_string": "qwen3.7-plus",
-      "benchmark_gpqa": 48,
+      "tier_score": 48,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text",
         "vision"
@@ -531,7 +551,8 @@
       "context_window_tokens": 256000,
       "release_date": "2026-04-16",
       "api_string": "qwen3.6-flash",
-      "benchmark_gpqa": 44,
+      "tier_score": 44,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text",
         "vision"
@@ -546,7 +567,8 @@
       "context_window_tokens": 131072,
       "release_date": "2025-06-01",
       "api_string": "qwen2.5-72b",
-      "benchmark_gpqa": 41.5,
+      "tier_score": 41.5,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text"
       ],
@@ -560,7 +582,8 @@
       "context_window_tokens": 128000,
       "release_date": "2025-11-15",
       "api_string": "mistral-large-3",
-      "benchmark_gpqa": 48.9,
+      "tier_score": 48.9,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text"
       ],
@@ -574,7 +597,8 @@
       "context_window_tokens": 128000,
       "release_date": "2026-01-05",
       "api_string": "mistral-small-4",
-      "benchmark_gpqa": 30.5,
+      "tier_score": 30.5,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text"
       ],
@@ -588,7 +612,8 @@
       "context_window_tokens": 128000,
       "release_date": "2024-07-23",
       "api_string": "llama-3.1-8b-instant",
-      "benchmark_gpqa": 30,
+      "tier_score": 30,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text"
       ],
@@ -602,7 +627,8 @@
       "context_window_tokens": 128000,
       "release_date": "2025-04-05",
       "api_string": "llama-4-scout-17b-16e",
-      "benchmark_gpqa": 45,
+      "tier_score": 45,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text",
         "vision"
@@ -617,7 +643,8 @@
       "context_window_tokens": 128000,
       "release_date": "2024-12-06",
       "api_string": "llama-3.3-70b-versatile",
-      "benchmark_gpqa": 55,
+      "tier_score": 55,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text"
       ],
@@ -631,7 +658,8 @@
       "context_window_tokens": 128000,
       "release_date": "2025-08-05",
       "api_string": "openai/gpt-oss-120b",
-      "benchmark_gpqa": 58,
+      "tier_score": 58,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text"
       ],
@@ -645,7 +673,8 @@
       "context_window_tokens": 128000,
       "release_date": "2026-03-01",
       "api_string": "deepseek-ai/DeepSeek-V4-Pro",
-      "benchmark_gpqa": 71,
+      "tier_score": 71,
+      "benchmark_gpqa_real": 90.1,
       "modalities": [
         "text"
       ],
@@ -659,7 +688,8 @@
       "context_window_tokens": 256000,
       "release_date": "2026-02-28",
       "api_string": "Qwen/Qwen3.7-Max",
-      "benchmark_gpqa": 70,
+      "tier_score": 70,
+      "benchmark_gpqa_real": 92.4,
       "modalities": [
         "text",
         "vision"
@@ -674,7 +704,8 @@
       "context_window_tokens": 200000,
       "release_date": "2026-06-16",
       "api_string": "zai-org/GLM-5.2",
-      "benchmark_gpqa": 72,
+      "tier_score": 72,
+      "benchmark_gpqa_real": 91.2,
       "modalities": [
         "text"
       ],
@@ -688,7 +719,8 @@
       "context_window_tokens": 128000,
       "release_date": "2025-08-05",
       "api_string": "openai/gpt-oss-120b",
-      "benchmark_gpqa": 58,
+      "tier_score": 58,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text"
       ],
@@ -702,7 +734,8 @@
       "context_window_tokens": 128000,
       "release_date": "2024-08-30",
       "api_string": "command-r-plus-08-2024",
-      "benchmark_gpqa": 52,
+      "tier_score": 52,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text"
       ],
@@ -716,7 +749,8 @@
       "context_window_tokens": 128000,
       "release_date": "2024-03-11",
       "api_string": "command-r-03-2024",
-      "benchmark_gpqa": 40,
+      "tier_score": 40,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text"
       ],
@@ -730,7 +764,8 @@
       "context_window_tokens": 128000,
       "release_date": "2026-03-01",
       "api_string": "accounts/fireworks/models/deepseek-v4-pro",
-      "benchmark_gpqa": 71,
+      "tier_score": 71,
+      "benchmark_gpqa_real": 90.1,
       "modalities": [
         "text"
       ],
@@ -744,7 +779,8 @@
       "context_window_tokens": 128000,
       "release_date": "2026-03-01",
       "api_string": "accounts/fireworks/models/deepseek-v4-flash",
-      "benchmark_gpqa": 33,
+      "tier_score": 33,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text"
       ],
@@ -758,7 +794,8 @@
       "context_window_tokens": 200000,
       "release_date": "2026-06-16",
       "api_string": "accounts/fireworks/models/glm-5p2",
-      "benchmark_gpqa": 72,
+      "tier_score": 72,
+      "benchmark_gpqa_real": 91.2,
       "modalities": [
         "text"
       ],
@@ -772,7 +809,8 @@
       "context_window_tokens": 256000,
       "release_date": "2026-02-28",
       "api_string": "accounts/fireworks/models/qwen3p7-plus",
-      "benchmark_gpqa": 48,
+      "tier_score": 48,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text"
       ],
@@ -786,7 +824,8 @@
       "context_window_tokens": 128000,
       "release_date": "2024-12-06",
       "api_string": "llama-3.3-70b",
-      "benchmark_gpqa": 55,
+      "tier_score": 55,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text"
       ],
@@ -800,7 +839,8 @@
       "context_window_tokens": 131000,
       "release_date": "2025-05-01",
       "api_string": "qwen-3-32b",
-      "benchmark_gpqa": 44,
+      "tier_score": 44,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text"
       ],
@@ -814,7 +854,8 @@
       "context_window_tokens": 256000,
       "release_date": "2026-05-01",
       "api_string": "kimi-k2.6",
-      "benchmark_gpqa": 73,
+      "tier_score": 73,
+      "benchmark_gpqa_real": 90.5,
       "modalities": [
         "text"
       ],
@@ -828,7 +869,8 @@
       "context_window_tokens": 256000,
       "release_date": "2026-02-01",
       "api_string": "kimi-k2.5",
-      "benchmark_gpqa": 64,
+      "tier_score": 64,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text"
       ],
@@ -842,7 +884,8 @@
       "context_window_tokens": 200000,
       "release_date": "2026-06-16",
       "api_string": "glm-5.2",
-      "benchmark_gpqa": 72,
+      "tier_score": 72,
+      "benchmark_gpqa_real": 91.2,
       "modalities": [
         "text"
       ],
@@ -856,7 +899,8 @@
       "context_window_tokens": 128000,
       "release_date": "2025-12-01",
       "api_string": "glm-4.7-flash",
-      "benchmark_gpqa": 30,
+      "tier_score": 30,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text"
       ],
@@ -870,7 +914,8 @@
       "context_window_tokens": 128000,
       "release_date": "2024-12-06",
       "api_string": "meta-llama/Llama-3.3-70B-Instruct",
-      "benchmark_gpqa": 55,
+      "tier_score": 55,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text"
       ],
@@ -884,7 +929,8 @@
       "context_window_tokens": 128000,
       "release_date": "2024-12-06",
       "api_string": "meta-llama/Llama-3.3-70B-Instruct-Turbo",
-      "benchmark_gpqa": 55,
+      "tier_score": 55,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text"
       ],
@@ -898,7 +944,8 @@
       "context_window_tokens": 128000,
       "release_date": "2026-03-01",
       "api_string": "deepseek-ai/DeepSeek-V4-Pro",
-      "benchmark_gpqa": 71,
+      "tier_score": 71,
+      "benchmark_gpqa_real": 90.1,
       "modalities": [
         "text"
       ],
@@ -912,7 +959,8 @@
       "context_window_tokens": 1000000,
       "release_date": "2026-05-15",
       "api_string": "anthropic/claude-opus-4.8",
-      "benchmark_gpqa": 78.2,
+      "tier_score": 78.2,
+      "benchmark_gpqa_real": 93.6,
       "modalities": [
         "text",
         "vision"
@@ -927,7 +975,8 @@
       "context_window_tokens": 1000000,
       "release_date": "2026-07-09",
       "api_string": "muse-spark-1.1",
-      "benchmark_gpqa": 75,
+      "tier_score": 75,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text",
         "vision"
@@ -942,7 +991,8 @@
       "context_window_tokens": 1000000,
       "release_date": "2026-06-09",
       "api_string": "claude-fable-5",
-      "benchmark_gpqa": 79,
+      "tier_score": 78,
+      "benchmark_gpqa_real": 93.2,
       "modalities": [
         "text",
         "vision"
@@ -957,7 +1007,8 @@
       "context_window_tokens": 1000000,
       "release_date": "2026-06-30",
       "api_string": "claude-sonnet-5",
-      "benchmark_gpqa": 73,
+      "tier_score": 73,
+      "benchmark_gpqa_real": null,
       "modalities": [
         "text",
         "vision"
@@ -972,7 +1023,8 @@
       "context_window_tokens": 1000000,
       "release_date": "2026-07-09",
       "api_string": "gpt-5.6-sol",
-      "benchmark_gpqa": 78,
+      "tier_score": 78,
+      "benchmark_gpqa_real": 94.6,
       "modalities": [
         "text",
         "vision"
@@ -987,7 +1039,8 @@
       "context_window_tokens": 500000,
       "release_date": "2026-07-08",
       "api_string": "grok-4.5",
-      "benchmark_gpqa": 78.5,
+      "tier_score": 78,
+      "benchmark_gpqa_real": 93,
       "modalities": [
         "text",
         "vision"

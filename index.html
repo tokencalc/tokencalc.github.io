@@ -375,7 +375,7 @@ function ModelSelector({ data, filters, famById }) {
                 className="text-xs px-1.5 py-0.5 rounded">{famById[m.family_id]?.emoji} {famById[m.family_id]?.label.split(" ")[0]}</span>
             </div>
             <div className="text-xs text-slate-400 mt-1">{provName(m.provider_id)} · {fmtCtx(m.context_window_tokens)} ctx</div>
-            <div className="text-xs text-slate-500 mt-1">GPQA {m.benchmark_gpqa}% · {m.release_date} · #{m.popularity_rank} popular</div>
+            <div className="text-xs text-slate-500 mt-1">GPQA {m.benchmark_gpqa_real != null ? m.benchmark_gpqa_real + "%" : "n/a"} · {m.release_date} · #{m.popularity_rank} popular</div>
           </div>
         ))}
         {visible.length === 0 && <p className="text-slate-500 text-sm">No models match the current filters.</p>}
